@@ -1,0 +1,10 @@
+[
+  { "name": "yis galing taina", "type": "dog" },
+  { "name": "bato dela rosa", "type": "dog" },
+  { "name": "mimimi", "type": "cat" },
+  { "name": "habemus papam", "type": "cat" },
+  { "name": "lorem ipsum", "type": "dog" },
+  { "name": "another kitty", "type": "cat" },
+  { "name": "cute doggo", "type": "dog" },
+  { "name": "meow meow", "type": "cat" }
+]
