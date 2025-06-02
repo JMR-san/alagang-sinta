@@ -1,0 +1,24 @@
+:root {
+    --header-color: #646C5B;
+    --footer-color: #646C5B;
+    --main-color: #4D5E3A;
+    --background-color: #f2efdf;
+}
+
+#pet-details-container {
+    background-color: var(--background-color);
+    display: flex;
+    flex-grow: 1;
+    flex-wrap: wrap;
+    padding: 40px 0px;
+}
+.pet-image-holder {
+    width: 40%;
+    height: auto;
+}
+
+#pet-name-holder {
+    width: 60%;
+    height: auto;
+    padding-left: 50px;
+}

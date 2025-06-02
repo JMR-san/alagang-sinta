@@ -1,10 +1,47 @@
 [
-  { "name": "yis galing taina", "type": "dog" },
-  { "name": "bato dela rosa", "type": "dog" },
-  { "name": "mimimi", "type": "cat" },
-  { "name": "habemus papam", "type": "cat" },
-  { "name": "lorem ipsum", "type": "dog" },
-  { "name": "another kitty", "type": "cat" },
-  { "name": "cute doggo", "type": "dog" },
-  { "name": "meow meow", "type": "cat" }
+    {
+        "id": 1,
+        "name": "Buddy",
+        "type": "dog",
+        "breed": "Golden Retriever",
+        "age": "2 years",
+        "description": "Friendly and playful.",
+        "image": "/assets/img/pet-profile/dummy-dog1.jpg"
+    },
+    {
+        "id": 2,
+        "name": "Mittens",
+        "type": "cat",
+        "breed": "Siamese",
+        "age": "3 years",
+        "description": "Loves cuddles.",
+        "image": "/assets/img/pet-profile/dummy-cat1.jpg"
+    },
+    {
+        "id": 3,
+        "name": "Mittens",
+        "type": "cat",
+        "breed": "Siamese",
+        "age": "3 years",
+        "description": "Loves cuddles.",
+        "image": "/assets/img/pet-profile/dummy-cat2.jpg"
+    },
+    {
+        "id": 4,
+        "name": "Mittens",
+        "type": "cat",
+        "breed": "Siamese",
+        "age": "3 years",
+        "description": "Loves cuddles.",
+        "image": "/assets/img/pet-profile/dummy-cat2.jpg"
+    },
+    {
+        "id": 4,
+        "name": "Mittens",
+        "type": "cat",
+        "breed": "Siamese",
+        "age": "3 years",
+        "description": "Loves cuddles.",
+        "image": "/assets/img/pet-profile/dummy-cat2.jpg"
+    }
 ]

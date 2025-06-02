@@ -1,0 +1,274 @@
+/* Styling used in every pages */
+/* Color Palette */
+:root {
+    --header-color: #646C5B;
+    --footer-color: #646C5B;
+    --main-color: #4D5E3A;
+    --background-color: #f2efdf;
+}
+
+
+/* === Base Resets === */
+html, body {
+    height: 100%;
+    margin: 0;
+    font-size: 100%;
+    font-family: 'Poppins', sans-serif;
+}
+
+a {
+    cursor: pointer;
+}
+
+/* === Typography Styles === */
+.Text-Title {
+    font-size: 5.5em;
+    font-weight: 600;
+}
+
+.Text-Headings {
+    font-weight: 500;
+    text-align: center;
+}
+
+.Text-Paragraph,
+li {
+    font-size: 1em;
+    font-weight: normal;
+    line-height: 1.5;
+    word-wrap: break-word;
+}
+
+/* Specific Headings */
+h1 { font-size: 5.5rem; font-weight: 600; }
+h2 { font-size: 4.5rem; font-weight: 300; }
+h3 { font-size: 1.8rem; font-weight: 500; text-align: center; }
+h4 { font-size: 1.5rem; font-weight: 200; }
+
+/* === Layout ===
+#page-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: rgba(237,239,241,0.56);
+}
+
+#content-wrap {
+    flex: 1;
+}
+
+.content-container {
+    margin-bottom: 25px;
+    padding-bottom: 15vw;
+    position: relative;
+    z-index: 900;
+} */
+
+#background-container {
+    width: 100%;
+    background: url(/assets/img/dummy-panel.jpg);
+    min-height: 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    background-color: rgba(242, 239, 223, 0.3);
+    background-blend-mode: soft-light;
+}
+
+#page-container {
+    /* background-color: aqua; */
+    height: fit-content;
+}
+
+.wrapper {
+    margin-right: auto; /* 1 */
+    margin-left: auto; /* 1 */
+    max-width:1450px; /* 2 */
+    padding-right: 100px; /* 3 */
+    padding-left: 100px; /* 3 */
+}
+
+/* === Header === */
+header {
+    background-color: var(--header-color);
+    color: var(--background-color);
+    display: flex;
+    justify-content:flex-start;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: fit-content;
+    z-index: 1000;
+    box-shadow: 0px 5px 9px 0px #000000;
+}
+
+#main-header {
+    display: flex;
+    /* background-color: aqua; */
+    padding-left: 1vw;
+}
+
+#main-header img {
+    height: 4vw;
+    align-self: center;
+    padding-left: 4vw;
+}
+
+#header-name {
+    padding: 0 2vw;
+    margin: auto 0; /* Center */
+    width: 20%;
+    font-size: 1.6em;
+}
+
+.header-content-nav {
+    width: 70%;
+    /* background-color: yellow; */
+    font-weight: 600;
+    margin: auto 0; /* Center */
+    
+}
+
+.header-content-nav ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 30px;
+    padding: 0;
+    align-items: center;
+}
+
+.header-content-nav ul li {
+    float: left;
+}
+
+.header-content-nav ul li a {
+    height: 4vw;
+    padding: 0 10px;
+}
+
+.header-content-nav ul li a:hover {
+    opacity: 0.5;
+}
+
+.header-content-login {
+    /* background-color: yellowgreen; */
+    width: 17.5;
+    margin: auto 0;
+}
+
+/* === Footer === */
+footer {
+    background-color: var(--footer-color);
+    height: 50vh;
+    width: 100%;
+    /* margin-top: -50px; */
+    position: relative;
+    z-index: 1000;
+}
+
+.footer-container {
+    display: flex;
+    padding: 2%;
+    height: 100%;
+}
+
+.footer-logo {
+    height: 20vw;
+    align-self: left;
+}
+
+.footer-contact, .footer-shortcuts {
+    width: 100%;
+    margin-top: 1%;
+    text-align: left;
+}
+
+.footer-contact {
+    max-width: 45vw;
+}
+
+.footer-contact img,
+.contact-address img {
+    max-width: 2.5vw;
+}
+
+.contact-address {
+    display: flex;
+    align-items: center;
+    max-width: 30vw;
+    margin-bottom: 5px;
+    padding: 1%;
+}
+
+.contact-address img {
+    margin-right: 10px;
+    height: 100%;
+    max-height: 2vw;
+}
+
+.footer-shortcuts {
+    max-width: 45vw;
+    padding-right: 5%;
+}
+
+.shortcut-images {
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 5%;
+    max-width: 40vw;
+    padding: 2%;
+}
+
+.shortcut-images img {
+    max-width: 2vw;
+}
+
+.shortcut-text {
+    max-width: 45vw;
+    text-align: end;
+    padding: 3% 0;
+}
+
+.shortcut-text p {
+    margin: 2%;
+}
+
+#web-rights {
+    margin-top: 40px;
+}
+
+/* === Buttons === */
+.buttons {
+    border: 0.5% solid black;
+    box-shadow: 2px 2px 7px 1px #000;
+    border-radius: 0.5vw;
+    font-family: Poppins;
+    font-weight: 600;
+    font-size: 1.2vw;
+    text-align: center;
+    cursor: pointer;
+}
+
+.buttons:hover {
+    opacity: 0.7;
+}
+
+.buttons:active {
+    opacity: 1;
+}
+
+#btn-login {
+    margin: 10px;
+    height: 3vw;
+    width: 10vw;
+    background-color: var(--main-color);
+}
+
+#btn-hero-adopt {
+    height: 4vw;
+    width: 20vw;
+    background-color: var(--main-color);
+    color: var(--background-color);
+}

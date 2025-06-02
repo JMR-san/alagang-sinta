@@ -1,31 +1,24 @@
-:root {
-    --header-color: #646C5B;
-    --footer-color: #646C5B;
-    --main-color: #4D5E3A;
-    --background-color: #F2EFDF;
+
+.btn-login {
+    margin: 10px;
+    height: 3vw;
+    width: 10vw;
+    background-color: green;
 }
 
-#btn-hero-adopt {
+.btn-hero-adopt {
     height: 4vw;
     width: 20vw;
-    background-color: var(--main-color);
-    color: var(--background-color);
+    background-color: aquamarine;
+    color: #000;
 }
 
-#btn-act {
+.btn-act {
     width: 15vw;
     height: 4vw;
     border-radius: 20px;
     text-align: center;
 }
-
-#btn-act {
-    width: 15vw;
-    height: 4vw;
-    border-radius: 20px;
-    text-align: center;
-}
-
 
 /* === Hero Section === */
 .hero-img {
@@ -33,13 +26,13 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    height: 90vh;
+    height: 100vh;
     position: relative;
     box-shadow: 2px 4px 9px 0px #000000;
 }
 
 .hero-txt {
-    color: var(--background-color);
+    color: white;
     text-align: center;
     position: absolute;
     top: 50%;
@@ -49,20 +42,19 @@
 
 /* === Sections === */
 .section {
-    background-color: var(--background-color);
+    /* background-color: aquamarine; */
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     padding: 0 10%;
-    /* margin-bottom: 50px; */
+    margin-bottom: 50px;
     width: 100%;
     height: fit-content;
-    padding: 50px 0px;
-    color: var(--main-color);
+    padding-top: 50px;
 }
 
-@media (max-width: 1160) {
+@media (max-width: 800px) {
     .section {
         flex-direction: column;
     }
@@ -80,7 +72,7 @@
     max-width: 450px;
     height: auto;
     aspect-ratio: 3 / 2;
-    /* background-color: gold; */
+    background-color: gold;
     box-shadow: 2px 4px 9px 0px #000000
 }
 
@@ -89,9 +81,6 @@
     border-bottom-left-radius: 50%;
     margin-left: 5%;
     margin-right: 5%;
-    background-image: url(/assets/img/dummy-mission.jpeg);
-    background-size: cover;
-    background-repeat: no-repeat;
 }
 
 .shape-BRight {
@@ -99,9 +88,6 @@
     border-bottom-right-radius: 50%;
     margin-left: 5%;
     margin-right: 5%;
-    background-image: url(/assets/img/dummy-vision.jpg);
-    background-size: cover;
-    background-repeat: no-repeat;
 }
 
 .text-BLeft, .text-TRight {
@@ -130,8 +116,8 @@
     margin: auto;
     width: 100%;
     margin: 0;
-    background-color: var(--main-color);
-    color: var(--background-color);
+    background-color: grey;
+    box-shadow: 2px 4px 9px 0px #000000;    
 }
 
 .bs-container-images, .act-container-images {
@@ -141,12 +127,6 @@
     margin: 0 5%;
     gap: 8.5vw;
     width: 100%;
-}
-
-.act-container-wrapper{
-    background-color: var(--background-color);
-    padding: 5% 0 5% 0;
-    margin-bottom: 0;
 }
 
 .bs-container-images img {
@@ -166,16 +146,14 @@
     margin: 1% 5% 0 5%;
     width: 100%;
     max-width: 200vw;
-    color: var(--background-color);
-    font-weight: 600;
 }
 
 .act-images-buttons button {
-    background-color: var(--main-color);
+    background-color: rgba(137,3,3,0.56);
 }
 
 .shape-line {
-    background-color: var(--background-color);
+    background-color: #000;
     width: 0.1%;
 }
 

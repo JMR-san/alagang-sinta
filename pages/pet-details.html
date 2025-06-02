@@ -9,9 +9,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <!--CSS LINK-->
-    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/pet-details.css">
     <link rel="stylesheet" href="../css/view-animal.css">
     <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/global.css">
 </head>
 <body>
     <div id="background-container">
@@ -35,23 +36,22 @@
         <div id="page-container" class="wrapper">
         <main>
             <div class="content-container">
-                 <div class="animal-container">
-                    <div class="animal-filter">
-                        <button id="all-active" class="buttons" onclick="filterPets('all', this)">All Pets</button>
-                        <button class="buttons" onclick="filterPets('dog', this)">Dogs</button>
-                        <button class="buttons" onclick="filterPets('cat', this)">Cats</button>
+                <div id="pet-details-container">
+                    <img alt="" src="" id="pet-image" class="pet-image-holder"/>
+                    <div id="pet-name-holder">
+                        <h1 id="pet-name">Loading...</h1>
+                        <div id="pet-info"></div>
                     </div>
-                    <div class="grid-container" id="petGrid"></div>
-                 </div>
-                 </div>
-            </main>
+                </div>
+            </div>
+        </main>
         </div>
         <footer>
             <div class="footer-container">
                 <img src="../assets/img/dummy-logo.png" alt="dummy-logo" class="footer-logo">
                 <div class="footer-contact">
                     <h4>NEED HELP? CONTACT US</h4>
-                        <div class="contact-address">
+                    <div class="contact-address">
                         <img src="../assets/img/dummy-icon 1.png">
                         <p>Address: 123 Street City Province 123</p>
                     </div>
@@ -83,54 +83,38 @@
                 </div>
             </div>
         </footer> 
-    </div>
 
-<script>
-    let allPets = [];
-// From json to container
-    function renderPets(filter) {
-    const container = document.getElementById('petGrid');
-    container.innerHTML = '';
-    const filtered = filter === 'all' ? allPets : allPets.filter(p => p.type === filter);
-    filtered.forEach(pet => {
-        const card = document.createElement('div');
-        card.className = 'pet-card';
-        card.innerHTML = `
-            <a href="pet-details.html?id=${pet.id}" class="pet-link">
-                <div class="image">
-                    <img src="${pet.image}" alt="${pet.name}" />
-                </div>
-                <div>${pet.name}</div>
-            </a>
-        `;
-        container.appendChild(card);
-    });
-}
+    <script>
+        // Helper: Get ID from URL
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
 
-// Filter
-    function filterPets(type, button) {
-        document.querySelectorAll('.animal-filter button').forEach(btn => {
-            btn.classList.remove('active');
-        });
-        button.classList.add('active');
-        renderPets(type);
-    }
+        const petId = getQueryParam("id");
 
-//  Fetch Data from Json
-    fetch('../assets/data/pets.json')
-    .then(response => response.json())
-    .then(data =>{
-        allPets = data;
-        renderPets('all');
-    })
-    .catch(error => {
-        console.error('Error loading pet data: ', error);
-    });
+        fetch("../assets/data/pets.json")
+            .then((res) => res.json())
+            .then((pets) => {
+                const pet = pets.find((p) => p.id == petId);
+                if (!pet) {
+                    document.getElementById("pet-name").innerText = "Pet not found";
+                    return;
+                }
 
-// <!-- BUTTON ALERT TESTER -->
-    function msg() {
-    alert("GUMAGANA YUNG BUTTONS");
-    }
-</script>
+                document.getElementById("pet-image").src = pet.image;
+                document.getElementById("pet-name").innerText = pet.name;
+                document.getElementById("pet-info").innerHTML = `
+                    <p>Type: ${pet.type}</p>
+                    <p>Breed: ${pet.breed || 'Unknown'}</p>
+                    <p>Age: ${pet.age || 'N/A'}</p>
+                    <p>Description: ${pet.description || 'No description available.'}</p>
+                `;
+            })
+            .catch((err) => {
+                console.error("Error loading pet:", err);
+                document.getElementById("pet-name").innerText = "Error loading pet";
+            });
+    </script>
 </body>
 </html>
