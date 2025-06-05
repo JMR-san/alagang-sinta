@@ -31,14 +31,14 @@
                 </ul>
             </nav>
             <div class="header-content-login">
-                <button id="btn-login" class="buttons" onclick="msg()">Login</button>
+                <button id="btn-login" class="buttons" onclick="location.href='/pages/application-form.html'">Login</button>
             </div>
         </header>
         <div id="page-container" class="wrapper">
             <main>
                 <div class="content-container">
                     <div id="pet-details-container">
-                        <div>
+                        <div class="images-container">
                             <div id="pet-image-container">
                                 <img alt="" src="" id="pet-image-default" class="pet-image-holder"/>
                                 <img alt="" src="" class="pet-image-holder"/>
@@ -51,13 +51,16 @@
                         <div id="pet-name-holder">
                             <h1 id="pet-name">Loading...</h1>
                             <div id="pet-info"></div>
+                            <!-- <div class="border-line"></div> -->
                             <div id="adopt-btn">                        
                                 <button id="btn-animal-adopt" class="buttons" onclick="location.href='#'" >ADOPT</button>
                             </div> 
                         </div>
+                        <div class="border-line"></div>
                         <div id="pet-desc-container">
                             <div id="pet-desc"></div>
                         </div>
+                        <div class="border-line"></div>
                     </div>
                 </div>
             </main>
