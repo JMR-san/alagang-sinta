@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="../css/view-animal.css">
     <link rel="stylesheet" href="../css/reset.css">
     <link rel="stylesheet" href="../css/global.css">
+    <!-- SCRIPT -->
 </head>
 <body>
     <div id="background-container">
@@ -22,29 +23,44 @@
                 Alagang Sinta
             </div>
             <nav class="header-content-nav">
-                    <ul>
-                        <li><a href="../index.html">Home</a></li>
-                        <li><a href="/pages/view-animal.html">Get Involved</a></li>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Contact</a></li>
-                    </ul>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="/pages/view-animal.html">Get Involved</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact</a></li>                    
+                </ul>
             </nav>
             <div class="header-content-login">
                 <button id="btn-login" class="buttons" onclick="msg()">Login</button>
             </div>
         </header>
         <div id="page-container" class="wrapper">
-        <main>
-            <div class="content-container">
-                <div id="pet-details-container">
-                    <img alt="" src="" id="pet-image" class="pet-image-holder"/>
-                    <div id="pet-name-holder">
-                        <h1 id="pet-name">Loading...</h1>
-                        <div id="pet-info"></div>
+            <main>
+                <div class="content-container">
+                    <div id="pet-details-container">
+                        <div>
+                            <div id="pet-image-container">
+                                <img alt="" src="" id="pet-image-default" class="pet-image-holder"/>
+                                <img alt="" src="" class="pet-image-holder"/>
+                                <img alt="" src="" class="pet-image-holder"/>
+                            </div>
+                            <div id="pet-thumbnails"></div>
+                        </div>
+                        <!-- This element can still have an ID if it's used for showing text/debug info -->
+                        <!-- <div id="pet-image"></div> -->
+                        <div id="pet-name-holder">
+                            <h1 id="pet-name">Loading...</h1>
+                            <div id="pet-info"></div>
+                            <div id="adopt-btn">                        
+                                <button id="btn-animal-adopt" class="buttons" onclick="location.href='#'" >ADOPT</button>
+                            </div> 
+                        </div>
+                        <div id="pet-desc-container">
+                            <div id="pet-desc"></div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </main>
+            </main>
         </div>
         <footer>
             <div class="footer-container">
@@ -83,7 +99,8 @@
                 </div>
             </div>
         </footer> 
-
+    <script src="/javascript/button-alert.js"></script>
+    <script src="/javascript/slideshow.js"></script>
     <script>
         // Helper: Get ID from URL
         function getQueryParam(param) {
@@ -96,25 +113,76 @@
         fetch("../assets/data/pets.json")
             .then((res) => res.json())
             .then((pets) => {
-                const pet = pets.find((p) => p.id == petId);
-                if (!pet) {
-                    document.getElementById("pet-name").innerText = "Pet not found";
-                    return;
-                }
+    const pet = pets.find((p) => p.id == petId);
+    if (!pet) {
+        document.getElementById("pet-name").innerText = "Pet not found";
+        return;
+    }
 
-                document.getElementById("pet-image").src = pet.image;
-                document.getElementById("pet-name").innerText = pet.name;
-                document.getElementById("pet-info").innerHTML = `
-                    <p>Type: ${pet.type}</p>
-                    <p>Breed: ${pet.breed || 'Unknown'}</p>
-                    <p>Age: ${pet.age || 'N/A'}</p>
-                    <p>Description: ${pet.description || 'No description available.'}</p>
-                `;
-            })
-            .catch((err) => {
-                console.error("Error loading pet:", err);
-                document.getElementById("pet-name").innerText = "Error loading pet";
-            });
+    const imageContainer = document.getElementById("pet-image-container");
+    const thumbnailContainer = document.getElementById("pet-thumbnails");
+
+    imageContainer.innerHTML = "";
+    thumbnailContainer.innerHTML = "";
+
+    let currentSlide = 0;
+    let slideshowInterval;
+
+    // Create image and thumbnail elements
+    pet.image.forEach((src, index) => {
+        const img = document.createElement("img");
+        img.src = src;
+        img.alt = `Pet Image ${index + 1}`;
+        img.classList.add("pet-image-holder");
+        if (index === 0) img.classList.add("active");
+        imageContainer.appendChild(img);
+
+        const thumb = document.createElement("div");
+        thumb.classList.add("thumbnail");
+        if (index === 0) thumb.classList.add("active");
+        thumb.innerHTML = `<img src="${src}" alt="Thumbnail ${index + 1}">`;
+        thumb.addEventListener("click", () => {
+            setSlide(index);
+        });
+        thumbnailContainer.appendChild(thumb);
+    });
+
+    const slides = document.querySelectorAll(".pet-image-holder");
+    const thumbnails = document.querySelectorAll(".thumbnail");
+
+    function setSlide(index) {
+        slides[currentSlide].classList.remove("active");
+        thumbnails[currentSlide].classList.remove("active");
+        currentSlide = index;
+        slides[currentSlide].classList.add("active");
+        thumbnails[currentSlide].classList.add("active");
+    }
+
+    function startSlideshow() {
+        slideshowInterval = setInterval(() => {
+            let nextIndex = (currentSlide + 1) % slides.length;
+            setSlide(nextIndex);
+        }, 3000);
+    }
+
+    startSlideshow();
+
+    document.getElementById("pet-name").innerText = pet.name;
+    document.getElementById("pet-info").innerHTML = `
+        <p><strong>Type:</strong> ${pet.species}</p>
+        <p><strong>Breed:</strong> ${pet.breed || 'Unknown'}</p>
+        <p><strong>Age:</strong> ${pet.age || 'N/A'}</p>
+        <p><strong>Size:</strong> ${pet.size}</p>
+        <p><strong>Sex:</strong> ${pet.sex}</p>
+        <p><strong>Vaccinated:</strong> ${pet.vaccinated}</p>
+        <p><strong>Neutered:</strong> ${pet.neutered}</p>
+    `;
+    document.getElementById("pet-desc").innerHTML =`
+        <h3><strong>About ${pet.name}</strong></h3>
+        <p>${pet.description || 'No description available.'}</p>
+    `;
+})
+
     </script>
 </body>
 </html>

@@ -98,7 +98,7 @@
         card.innerHTML = `
             <a href="pet-details.html?id=${pet.id}" class="pet-link">
                 <div class="image">
-                    <img src="${pet.image}" alt="${pet.name}" />
+                    <img src="${pet.image[0]}" alt="${pet.name}" />
                 </div>
                 <div>${pet.name}</div>
             </a>
