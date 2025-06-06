@@ -1,77 +1,171 @@
 [
     {
-        "id": 1,
-        "name": "Buddy",
+        "pet_id": "P001",
+        "name": "Maxie",
         "species": "Dog",
         "breed": "Golden Retriever",
         "age": "2 years",
-        "size": "Medium",
-        "sex": "Female",
+        "size": "Large",
+        "sex": "Male",
         "vaccinated": "Yes",
         "neutered": "Yes",
-        "description": "Friendly and playful.Friendly and playful.Friendly and playful.Friendly and playful.Friendly and playful.Friendly and playful.Friendly and playful.Friendly and playful.Friendly and playful.Friendly and playful.Friendly and playful.Friendly and playful.Friendly and playful.Friendly and playful.Friendly and playful.Friendly and playful.Friendly and playful.Friendly and playful.Friendly and playful.Friendly and playful.",
-        "image": ["/assets/img/pet-profile/dummy-dog1.jpg",
-                "/assets/img/pet-profile/dummy-cat2.jpg",
-                "/assets/img/pet-profile/dummy-cat1.jpg"]
+        "about_me": "Friendly, loyal, loves cuddles, playful, gentle with children, sociable",
+        "image": [
+            "/assets/img/pet-profile/p001-maxie1.jpg",
+            "/assets/img/pet-profile/p001-maxie2.jpg",
+            "/assets/img/pet-profile/p001-maxie3.jpg"
+        ]
     },
     {
-        "id": 2,
-        "name": "Mittens",
+        "pet_id": "P002",
+        "name": "Loki",
         "species": "Cat",
         "breed": "Siamese",
-        "age": "3 years",
-        "size": "Medium",
-        "sex": "Female",
+        "age": "2 years",
+        "size": "Small",
+        "sex": "Male",
         "vaccinated": "Yes",
         "neutered": "Yes",
-        "description": "Loves cuddles.",
-        "image": ["/assets/img/pet-profile/dummy-cat1.jpg",
-            "/assets/img/pet-profile/dummy-cat1.jpg",
-            "/assets/img/pet-profile/dummy-cat1.jpg"]
+        "about_me": "Affectionate, intelligent, curious, loves cuddles",
+        "image": [
+            "/assets/img/pet-profile/p002-loki1.jpg",
+            "/assets/img/pet-profile/p002-loki2.jpg",
+            "/assets/img/pet-profile/p002-loki3.jpg"
+        ]
     },
     {
-        "id": 3,
-        "name": "Mittens",
-        "species": "Cat",
-        "breed": "Siamese",
-        "age": "3 years",
-        "size": "Medium",
+        "pet_id": "P003",
+        "name": "Stormi",
+        "species": "Dog",
+        "breed": "Shih Tzu",
+        "age": "1 years",
+        "size": "Small",
         "sex": "Female",
         "vaccinated": "Yes",
-        "neutered": "Yes",
-        "description": "Loves cuddles.",
-        "image": ["/assets/img/pet-profile/dummy-cat1.jpg",
-            "/assets/img/pet-profile/dummy-cat1.jpg",
-            "/assets/img/pet-profile/dummy-cat1.jpg"]
+        "neutered": "No",
+        "about_me": "Sweet-natured, alert, loving, calm, enjoys companionship",
+        "image": [
+            "/assets/img/pet-profile/p003-stormi1.jpg",
+            "/assets/img/pet-profile/p003-stormi2.jpg",
+            "/assets/img/pet-profile/p003-stormi3.jpg"
+        ]
     },
     {
-        "id": 4,
-        "name": "Mittens",
+        "pet_id": "P004",
+        "name": "Ningning",
         "species": "Cat",
-        "breed": "Siamese",
-        "age": "3 years",
-        "size": "Medium",
+        "breed": "Puspin/Philippine Shorthair",
+        "age": "2 years",
+        "size": "Small",
         "sex": "Female",
         "vaccinated": "Yes",
         "neutered": "Yes",
-        "description": "Loves cuddles.",
-        "image": ["/assets/img/pet-profile/dummy-cat1.jpg",
-            "/assets/img/pet-profile/dummy-cat1.jpg",
-            "/assets/img/pet-profile/dummy-cat1.jpg"]
+        "about_me": "Adaptable, independent, affectionate, playful, street-smart",
+        "image": [
+            "/assets/img/pet-profile/p004-ningning1.jpg",
+            "/assets/img/pet-profile/p004-ningning2.jpg",
+            "/assets/img/pet-profile/p004-ningning3.png"
+        ]
     },
     {
-        "id": 4,
-        "name": "Mittens",
+        "pet_id": "P005",
+        "name": "Georgie",
+        "species": "Dog",
+        "breed": "Dachshund",
+        "age": "2 years",
+        "size": "Medium",
+        "sex": "Male",
+        "vaccinated": "Yes",
+        "neutered": "Yes",
+        "about_me": "Playful, clever, loyal, can be stubborn, loves to explore",
+        "image": [
+            "/assets/img/pet-profile/p005-georgie1.jpg",
+            "/assets/img/pet-profile/p005-georgie2.jpg",
+            "/assets/img/pet-profile/p005-georgie3.jpg"
+        ]
+    },
+    {
+        "pet_id": "P006",
+        "name": "Luna",
         "species": "Cat",
-        "breed": "Siamese",
-        "age": "3 years",
+        "breed": "American Curl",
+        "age": "1 years",
         "size": "Medium",
         "sex": "Female",
         "vaccinated": "Yes",
         "neutered": "Yes",
-        "description": "Loves cuddles.",
-        "image": ["/assets/img/pet-profile/dummy-cat1.jpg",
-            "/assets/img/pet-profile/dummy-cat1.jpg",
-            "/assets/img/pet-profile/dummy-cat1.jpg"]
+        "about_me": "Playful, affectionate, curious, people-oriented, adaptable, gentle",
+        "image": [
+            "/assets/img/pet-profile/p006-luna1.jpeg",
+            "/assets/img/pet-profile/p006-luna1.jpg"
+        ]
+    },
+    {
+        "pet_id": "P007",
+        "name": "Puti",
+        "species": "Dog",
+        "breed": "Aspin",
+        "age": "3 years",
+        "size": "Large",
+        "sex": "Female",
+        "vaccinated": "Yes",
+        "neutered": "Yes",
+        "about_me": "Loyal, intelligent, protective, friendly, energetic, resilient",
+        "image": [
+            "/assets/img/pet-profile/p007-puti1.jpg",
+            "/assets/img/pet-profile/p007-puti2.jpg",
+            "/assets/img/pet-profile/p007-puti3.png"
+        ]
+    },
+    {
+        "pet_id": "P008",
+        "name": "Tiger",
+        "species": "Cat",
+        "breed": "Bengal",
+        "age": "1 years",
+        "size": "Small",
+        "sex": "Male",
+        "vaccinated": "Yes",
+        "neutered": "No",
+        "about_me": "Intelligent, confident, playful, enjoys climbing and exploring",
+        "image": [
+            "/assets/img/pet-profile/p008-tiger1.jpg",
+            "/assets/img/pet-profile/p008-tiger2.jpg",
+            "/assets/img/pet-profile/p008-tiger3.png"
+        ]
+    },
+    {
+        "pet_id": "P009",
+        "name": "Boie",
+        "species": "Dog",
+        "breed": "Labrador",
+        "age": "3 years",
+        "size": "Large",
+        "sex": "Male",
+        "vaccinated": "Yes",
+        "neutered": "Yes",
+        "about_me": "Friendly, energetic, obedient, trainable, affectionate, loves retrieving",
+        "image": [
+            "/assets/img/pet-profile/p009-boie1.jpg",
+            "/assets/img/pet-profile/p009-boie2.jpg",
+            "/assets/img/pet-profile/p009-boie3.jpg"
+        ]
+    },
+    {
+        "pet_id": "P010",
+        "name": "Tala",
+        "species": "Cat",
+        "breed": "Persian",
+        "age": "1 years",
+        "size": "Medium",
+        "sex": "Female",
+        "vaccinated": "Yes",
+        "neutered": "Yes",
+        "about_me": "Gentle, affectionate, quiet, prefers a serene environment",
+        "image": [
+            "/assets/img/pet-profile/p010-tala1.jpg",
+            "/assets/img/pet-profile/p010-tala2.jpg",
+            "/assets/img/pet-profile/p010-tala3.jpg"
+        ]
     }
 ]
