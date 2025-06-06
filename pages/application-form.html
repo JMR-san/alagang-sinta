@@ -47,6 +47,9 @@
                             <br>
                             Remember that this is a lifetime commitment.<br><br>
                         </p>
+                        <!-- Message display area -->
+                        <div id="form-message" class="text-center p-4 rounded-md hidden"></div>
+                        
                         <form action="" method="POST" class="form-information">
                             <div id="applicant" class="applicant-information">
                                 <h4><u><strong>APPLICANT INFORMATAION</strong></u></h4>
@@ -124,20 +127,61 @@
                                 </div>
                                 <div class="form-row">
                                     <label>If you have children, have they been taught how to behave with animals?</label>
-                                    <label><input type="radio" name="allowedpets" value="Yes"> Yes</label>
-                                    <label><input type="radio" name="allowedpets" value="No"> No</label>
+                                    <label><input type="radio" name="childbehave" value="Yes"> Yes</label>
+                                    <label><input type="radio" name="childbehave" value="No"> No</label>
                                 </div>
                                 <div class="form-row">
                                     <label>Do we have permission to visit your home?</label>
-                                    <label><input type="radio" name="allowedpets" value="Yes"> Yes</label>
-                                    <label><input type="radio" name="allowedpets" value="No"> No</label>
+                                    <label><input type="radio" name="visit" value="Yes"> Yes</label>
+                                    <label><input type="radio" name="visit" value="No"> No</label>
                                 </div>
                             </div>
-                            <div class="form-container">
+                            <div class="border-line"></div>
+                            <h4><u><strong>Household Member</strong></u></h4>
+                            <div class="UGH-container">
                                 <div id="members-container">
                                 <!-- Member fields will go here -->
+                                    <div class="reminder-container">
+                                        <p>List all members (excluding pets) of the household, including children.</p>
+                                    </div>
                                 </div>
                                 <button id="add-member" class="add-button">+ Add another member</button>
+                            </div>
+                            <div class="border-line"></div>
+                            <h4><u><strong>PET HISTORY</strong></u></h4>
+                            <h5><strong>Current Pets</strong></h5>
+                            <div></div>
+                            <div class="UGH-container">
+                                <div class="form-row">
+                                    <label>Do you currently have any pets?</label>
+                                    <label><input id="" type="radio" name="hascurrpets" value="yes"> Yes</label>
+                                    <label><input id="" type="radio" name="hascurrpets" value="No"> No</label>
+                                </div>
+                                <div id="currpets-container">
+                                    <div class="reminder-container">
+                                        <p>If yes, please give us the following details:</p>
+                                    </div>
+                                </div>
+                                <button id="add-currpet" class="add-button">+ Add another pet</button>
+                            </div>
+                            <div></div>
+                            <h5><u><strong>Past Pets</strong></u></h5>
+                            <div></div>
+                            <div class="UGH-container">
+                                <div class="form-row">
+                                    <label>Have you had any past pets?</label>
+                                    <label><input id="" type="radio" name="haspastpets" value="yes"> Yes</label>
+                                    <label><input id="" type="radio" name="haspastpets" value="No"> No</label>
+                                </div>
+                                <div id="pastpets-container">
+                                    <div class="reminder-container">
+                                        <p>If yes, please give us the following details:</p>
+                                    </div>
+                                </div>
+                                <button id="add-pastpet" class="add-button">+ Add another pet</button>
+                            </div>
+                            <div class="sign-up-btn-holder">
+                                <button class="btn-sign-up">Sign Up</button>
                             </div>
                         </form>
                     </div>
@@ -183,5 +227,8 @@
         </footer> 
 
 <script src="/javascript/add-member.js"></script>
+<script src="/javascript/add-curr-pets.js"></script>
+<script src="/javascript/add-pastpets.js"></script>
+<script src="/javascript/submit-form.js"></script>
 </body>
 </html>

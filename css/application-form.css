@@ -106,11 +106,12 @@ input {
 }
 .form-row {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 3%;
+  gap: 2%;
   margin-bottom: 15px;
-  /* flex-grow: 3; */
-  /* justify-content: space-between; */
+  flex-grow: 1;
+  /* justify-content:space-between; */
 }
 .stack-residence {
     width: 65%;
@@ -123,7 +124,12 @@ input {
   font-weight: 400;
 }
 
-.form-row input:checked[type="radio"] {
+input[type="radio"] {
+  border: 2px solid var(--main-color);
+  border-radius: 50%;
+}
+
+input:checked[type="radio"] {
   width: 20px;
   height: 20px;
   background-color: #333;
@@ -135,14 +141,16 @@ input {
 }
 
 
-.form-container {
-  max-width: 1000px;
+.household-container {
+  width: 100%;
   margin: auto;
-  background-color: #e0e0e0;
+  /* background-color: #e0e0e0; */
+  background: var(--background-color);
+  opacity: 0.8;
 }
 
 .member-form {
-  background: #f5f5f5;
+  background: var(--background-color);
   padding: 15px;
   margin-bottom: 20px;
   border-radius: 10px;
@@ -171,6 +179,7 @@ input[type="number"] {
   align-items: center;
   gap: 10px;
   flex-wrap: wrap;
+  
 }
 
 .checkbox-group label {
@@ -181,6 +190,7 @@ input[type="number"] {
 
 input[type="checkbox"] {
   margin-right: 5px;
+  border: 2px solid var(--main-color);
 }
 
 input:checked[type="checkbox"] {
@@ -192,9 +202,26 @@ input:checked[type="checkbox"] {
 .add-button {
   padding: 10px 20px;
   font-size: 16px;
-  background: white;
+  background: var(--main-color);
   border: 1px solid #aaa;
   border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 1%;
+  color: var(--background-color);
+}
+.delete-button {
+  /* position: absolute; */
+  top: 10px;
+  right: 10px;
+  background: #ff4d4d;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  font-size: 16px;
+  line-height: 25px;
+  text-align: center;
   cursor: pointer;
 }
 
@@ -204,3 +231,89 @@ input:checked[type="checkbox"] {
   }
 }
 
+.reminder-container {
+  width: 100%;
+  font-style: italic;
+}
+
+.border-line {
+  height: 5px;
+  width: 100%;
+  background-color: var(--background-color);
+  margin: 1% 0%;
+}
+.btn-sign-up {
+  padding: 10px 20px;
+  font-size: 16px;
+  background: var(--main-color);
+  border: 1px solid #aaa;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 1%;
+  color: var(--background-color);
+ 
+}
+
+.sign-up-btn-holder{
+   text-align: center;
+   margin-bottom: 3%;
+}
+
+.input-currspecies {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+}
+.input-currage {
+    display: flex;
+    flex-direction: column;
+    width: 10%;
+}
+
+.input-currgender {
+    display: flex;
+    flex-direction: column;
+    width: 10%;
+    justify-content: space-between;
+}
+
+/* .gender-container {
+    justify-content: space-between;
+} */
+
+.currpet-form, .pastpet-form{
+  background: var(--background-color);
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-vetname {
+    display: flex;
+    flex-direction: column;
+    width: 55%;
+}
+.input-vetnum {
+    display: flex;
+    flex-direction: column;
+    width: 42.5%;
+}
+
+.input-pastspecies {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+}
+.input-pastage {
+    display: flex;
+    flex-direction: column;
+    width: 10%;
+}
+.input-paststatus {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    justify-content: space-between;
+}

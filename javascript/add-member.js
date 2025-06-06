@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+  document.getElementsByClassName('reminder-container');
   const container = document.getElementById("members-container");
   const addBtn = document.getElementById("add-member");
 
