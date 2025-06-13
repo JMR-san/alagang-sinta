@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+    --header-color: #646C5B;
+    --footer-color: #646C5B;
+    --main-color: #4D5E3A;
+    --background-color: #f2efdf;
+}
+
+body {
+    font-family: Poppins;
+    height: fit-content;
+    background-color: var(--background-color);
+    height: 100vh;
+}
+
+
+#popup-login {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 300px;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 7px;
+}
+form input {
+    border: 1px solid var(--main-color);
+    width: 90%;
+    padding: 0.8rem;
+}
+form input[type="submit"]{
+    background-color: var(--background-color);
+    border: 0px;
+    font-weight: bolder;
+    color: var(--background-color);
+    background-color: var(--main-color);
+}
+input[type="submit"]:hover{
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+p a {
+    color: var(--main-color);
+}
+
+p a:hover {
+    cursor: pointer;
+}
+p a:active {
+    cursor: pointer;
+    text-decoration-line: underline;
+}
+
+.active {
+    display: block;
+}
+
+.hidden {
+    display: none;
+}

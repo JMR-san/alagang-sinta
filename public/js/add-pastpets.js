@@ -19,17 +19,17 @@ document.addEventListener("DOMContentLoaded", () => {
             <div class="stacking">
                 <div class="input-pastspecies">
                     <label for="pastspecies">Species</label>
-                    <input type="text" name="pastspecies" id="pastspecies" placeholder="Dog" />
+                    <input type="text" name="pastspecies" id="pastspecies-input" placeholder="Dog" />
                 </div>
                 <div class="input-pastage">
                     <label for="pastage">Age</label>
-                    <input type="number" name="pastage" id="pastage" placeholder="1" />
+                    <input type="number" name="pastage" id="pastage-input" placeholder="1" />
                 </div>
                 <div class="input-paststatus">
                     <label>Status</label>
                     <div class="form-row">
-                        <label><input type="radio" name="paststatus" id="paststatus" value="Deceased"/> Deceased</label>
-                        <label><input type="radio" name="paststatus" id="paststatus" value="Rehomed"/> Rehomed</label>
+                        <label><input type="radio" name="paststatus" id="" value="Deceased"/> Deceased</label>
+                        <label><input type="radio" name="paststatus" id="" value="Rehomed"/> Rehomed</label>
                     </div>
                 </div>
             </div>

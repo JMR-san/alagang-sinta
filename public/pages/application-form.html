@@ -16,23 +16,6 @@
 </head>
 <body>
     <div id="background-container">
-        <header id="main-header">
-            <img src="/assets/img/dummy-logo.png" alt="dummy-logo">
-            <div id="header-name">
-                Alagang Sinta
-            </div>
-            <nav class="header-content-nav">
-                <ul>
-                    <li><a href="../index.html">Home</a></li>
-                    <li><a href="/pages/view-animal.html">Get Involved</a></li>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Contact</a></li>                    
-                </ul>
-            </nav>
-            <div class="header-content-login">
-                <button id="btn-login" class="buttons" onclick="location.hred='/pages/application-form.html'">Login</button>
-            </div>
-        </header>
         <div id="page-container" class="wrapper">
             <main>
                 <div class="content-container">
@@ -48,59 +31,57 @@
                             Remember that this is a lifetime commitment.<br><br>
                         </p>
                         <!-- Message display area -->
-                        <div id="form-message" class="text-center p-4 rounded-md hidden"></div>
-                        
-                        <form action="" method="POST" class="form-information">
+                        <form action="/submit-form" method="POST" class="form-information">
                             <div id="applicant" class="applicant-information">
                                 <h4><u><strong>APPLICANT INFORMATAION</strong></u></h4>
                                 <div class="stacking">
                                     <div class="input-username">
                                         <label for="username">Username</label>
-                                        <input type="text" name="username" id="username" placeholder="Enter a Username" />
+                                        <input type="text" name="username" id="username-input" placeholder="Enter a Username" required/>
                                     </div>
                                     <div class="input-password">
                                         <label for="password">Password</label>
-                                        <input type="text" name="password" id="password" placeholder="Enter a Password" required />
+                                        <input type="text" name="password" id="password-input" placeholder="Enter a Password" required />
                                     </div>
                                 </div>
                                 <div class="stacking">
                                     <div class="input-fname">
                                         <label for="fullname">Full Name</label>
-                                        <input type="text" name="fullname" id="fullname" placeholder="FN MI. LN, Ex E.g. John D. Doe, Sr." required />
+                                        <input type="text" name="fullname" id="fullname-input" placeholder="FN MI. LN, Ex E.g. John D. Doe, Sr." required />
                                     </div>
                                     <div class="input-age">
                                         <label for="age">Age</label>
-                                        <input type="number" name="age" id="age" placeholder="Age" required />
+                                        <input type="number" name="age" id="age-input" placeholder="Age" required />
                                     </div>
                                     <div class="input-nationality">
                                         <label for="nationality">Nationality</label>
-                                        <input type="text" name="nationality" id="nationality" placeholder="Filipino" required />
+                                        <input type="text" name="nationality" id="nationality-input" placeholder="Filipino" required />
                                     </div>
                                 </div>
                                 <div class="stacking">
                                     <div class="input-address">
                                         <label for="address">Address</label>
-                                        <input type="text" name="address" id="address" placeholder="123, Street Name, City, Province" required />
+                                        <input type="text" name="address" id="address-input" placeholder="123, Street Name, City, Province" required />
                                     </div>
                                 </div>
                                 <div class="stacking">
                                     <div class="input-telphone">
                                         <label for="telphone">Telephone (Home)</label>
-                                        <input type="text" name="telphone" id="telphone" placeholder="123 123456" required />
+                                        <input type="text" name="telphone" id="telphone-input" placeholder="123 123456" required />
                                     </div>
                                     <div class="input-mobilenum">
                                         <label for="mobilenum">Address</label>
-                                        <input type="text" name="mobilenum" id="mobilenum" placeholder="09123456789" required />
+                                        <input type="text" name="mobilenum" id="mobilenum-input" placeholder="09123456789" required />
                                     </div>
                                 </div>
                                 <div class="stacking">
                                     <div class="input-emailadd">
                                         <label for="emailadd">Email Address</label>
-                                        <input type="text" name="emailadd" id="emailadd" placeholder="johnDoe@gmail.com" required />
+                                        <input type="email" name="emailadd" id="emailadd-input" placeholder="johnDoe@gmail.com" required />
                                     </div>
                                     <div class="input-occupation">
                                         <label for="occupation">Occupation</label>
-                                        <input type="text" name="occupation" id="occupation" placeholder="Unemployed" required />
+                                        <input type="text" name="occupation" id="occupation-input" placeholder="Unemployed" required />
                                     </div>
                                 </div>
                                 <div class="align">
@@ -138,7 +119,7 @@
                             </div>
                             <div class="border-line"></div>
                             <h4><u><strong>Household Member</strong></u></h4>
-                            <div class="UGH-container">
+                            <div class="family-container">
                                 <div id="members-container">
                                 <!-- Member fields will go here -->
                                     <div class="reminder-container">
@@ -151,7 +132,7 @@
                             <h4><u><strong>PET HISTORY</strong></u></h4>
                             <h5><strong>Current Pets</strong></h5>
                             <div></div>
-                            <div class="UGH-container">
+                            <div class="current-pets-container">
                                 <div class="form-row">
                                     <label>Do you currently have any pets?</label>
                                     <label><input id="" type="radio" name="hascurrpets" value="yes"> Yes</label>
@@ -167,7 +148,7 @@
                             <div></div>
                             <h5><u><strong>Past Pets</strong></u></h5>
                             <div></div>
-                            <div class="UGH-container">
+                            <div class="past-pets-container">
                                 <div class="form-row">
                                     <label>Have you had any past pets?</label>
                                     <label><input id="" type="radio" name="haspastpets" value="yes"> Yes</label>
@@ -182,53 +163,18 @@
                             </div>
                             <div class="sign-up-btn-holder">
                                 <button class="btn-sign-up">Sign Up</button>
+                                <p>Already have an Account? <a href="/index.html">Click Here</a></p>
                             </div>
                         </form>
                     </div>
                 </div>
             </main>
         </div>
-        <footer>
-            <div class="footer-container">
-                <img src="../assets/img/dummy-logo.png" alt="dummy-logo" class="footer-logo">
-                <div class="footer-contact">
-                    <h4>NEED HELP? CONTACT US</h4>
-                    <div class="contact-address">
-                        <img src="../assets/img/dummy-icon 1.png">
-                        <p>Address: 123 Street City Province 123</p>
-                    </div>
-                    <div class="contact-address">
-                        <img src="../assets/img/dummy-icon 1.png">
-                        <p>Phone: (63) 123 1234 123</p>
-                    </div>
-                    <div class="contact-address">
-                        <img src="../assets/img/dummy-icon 1.png">
-                        <p>Email: johndoe@gmail.com</p>
-                    </div>
-                    <div class="contact-address">
-                        <img src="../assets/img/dummy-icon 1.png">
-                        <p>Hours: Mon-Fri, 8:00 AM - 5:00 PM</p>
-                    </div>
-                </div>
-                <div class="footer-shortcuts">
-                    <div class="shortcut-images">
-                        <img src="../assets/img/dummy-icon 2.png">
-                        <img src="../assets/img/dummy-icon 2.png">
-                        <img src="../assets/img/dummy-icon 2.png">
-                    </div>
-                    <div class="shortcut-text">
-                        <p>Home</p>
-                        <p>About Us</p>
-                        <p>Get Started</p>
-                        <p id="web-rights">Alagang Sinta ~ All Rights Reserved</p>
-                    </div>
-                </div>
-            </div>
-        </footer> 
-
 <script src="/js/add-member.js"></script>
 <script src="/js/add-curr-pets.js"></script>
 <script src="/js/add-pastpets.js"></script>
 <script src="/js/submit-form.js"></script>
+<script src="/js/validation.js"></script>
+<script src="/js/query.js"></script>
 </body>
 </html>
