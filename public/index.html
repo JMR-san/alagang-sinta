@@ -52,9 +52,9 @@ form.addEventListener('submit', async (e) => {
 
   // Query your custom users table
   const { data, error } = await supabase
-    .from('household_member') // or your actual table name
+    .from('applicant_information') // or your actual table name
     .select('*')
-    .eq('house_member_name', email)
+    .eq('applicant_email', email)
     .single();
 
   if (error) {
@@ -64,7 +64,7 @@ form.addEventListener('submit', async (e) => {
   }
 
   // Compare passwords (use hashing in production!)
-  if (data.house_member_relationship !== password) {
+  if (data.applicant_password !== password) {
     error_message.innerText = "Incorrect password.";
     return;
   }
