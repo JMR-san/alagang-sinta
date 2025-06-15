@@ -29,7 +29,7 @@
 
 /* === Hero Section === */
 .hero-img {
-    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("/assets/img/dummy-bg.jpg");
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("/assets/img/bg-final.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -140,7 +140,7 @@
     justify-content: center;
     flex-wrap: wrap;
     margin: 0 5%;
-    gap: 8.5vw;
+    gap: 9vw;
     width: 100%;
 }
 
@@ -164,7 +164,7 @@
     display: inline-flex;
     justify-content: center;
     gap: 12.5%;
-    margin: 1% 5% 0 5%;
+    margin: 0 4% 0 5%;
     width: 100%;
     max-width: 200vw;
     color: var(--background-color);
@@ -205,3 +205,5 @@
     width: 100%;
     margin-top: 20px;
 }
+
+
