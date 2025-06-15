@@ -78,48 +78,48 @@ app.get('/pages/application-form.html', (req, res) => {
 });
 
 
-// API endpoint for form submission
-app.post('/submit-application', (req, res) => {
-    // Get the form data from the request body
-    const formData = req.body;
+// // API endpoint for form submission
+// app.post('/submit-application', (req, res) => {
+//     // Get the form data from the request body
+//     const formData = req.body;
 
-    // Assign the incrementing ID and current timestamp
-    const submissionId = nextId++; // Assign current ID and then increment for next time
-    formData.applicationId = submissionId; // Overwrite or add the backend-generated ID
-    formData.submissionTimestamp = new Date().toISOString();
+//     // Assign the incrementing ID and current timestamp
+//     const submissionId = nextId++; // Assign current ID and then increment for next time
+//     formData.applicationId = submissionId; // Overwrite or add the backend-generated ID
+//     formData.submissionTimestamp = new Date().toISOString();
 
-    // Create a unique folder for this submission using the new ID
-    const submissionFolder = path.join(submissionsDir, String(submissionId));
+//     // Create a unique folder for this submission using the new ID
+//     const submissionFolder = path.join(submissionsDir, String(submissionId));
 
-    // Check if folder exists, if not create it
-    if (!fs.existsSync(submissionFolder)) {
-        try {
-            fs.mkdirSync(submissionFolder, { recursive: true });
-            console.log(`Created folder for submission ID ${submissionId}: ${submissionFolder}`);
-        } catch (error) {
-            console.error(`Error creating folder for submission ID ${submissionId}:`, error);
-            return res.status(500).json({ message: 'Error creating submission folder.' });
-        }
-    }
+//     // Check if folder exists, if not create it
+//     if (!fs.existsSync(submissionFolder)) {
+//         try {
+//             fs.mkdirSync(submissionFolder, { recursive: true });
+//             console.log(`Created folder for submission ID ${submissionId}: ${submissionFolder}`);
+//         } catch (error) {
+//             console.error(`Error creating folder for submission ID ${submissionId}:`, error);
+//             return res.status(500).json({ message: 'Error creating submission folder.' });
+//         }
+//     }
 
-    // Define the file path for the JSON data within the submission folder
-    const filePath = path.join(submissionFolder, 'application_data.json');
+//     // Define the file path for the JSON data within the submission folder
+//     const filePath = path.join(submissionFolder, 'application_data.json');
 
-    // Write the form data to a JSON file
-    fs.writeFile(filePath, JSON.stringify(formData, null, 2), (err) => {
-        if (err) {
-            console.error('Error saving form data:', err);
-            return res.status(500).json({ message: 'Failed to save application data.' });
-        }
-        console.log(`Application data for ID ${submissionId} saved to ${filePath}`);
-        // Send a success response back to the client
-        res.status(200).json({
-            message: 'Application submitted successfully!',
-            applicationId: submissionId,
-            filePath: filePath
-        });
-    });
-});
+//     // Write the form data to a JSON file
+//     fs.writeFile(filePath, JSON.stringify(formData, null, 2), (err) => {
+//         if (err) {
+//             console.error('Error saving form data:', err);
+//             return res.status(500).json({ message: 'Failed to save application data.' });
+//         }
+//         console.log(`Application data for ID ${submissionId} saved to ${filePath}`);
+//         // Send a success response back to the client
+//         res.status(200).json({
+//             message: 'Application submitted successfully!',
+//             applicationId: submissionId,
+//             filePath: filePath
+//         });
+//     });
+// });
 
 // Start the server
 app.listen(PORT, () => {

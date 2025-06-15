@@ -18,17 +18,17 @@ document.addEventListener("DOMContentLoaded", () => {
             <div class="stacking">
                 <div class="input-currspecies">
                     <label for="currspecies">Species</label>
-                    <input type="text" name="currspecies" id="currspecies" placeholder="Dog" />
+                    <input type="text" name="currspecies" id="currspecies-input" placeholder="Dog" />
                 </div>
                 <div class="input-currage">
                     <label for="currage">Age</label>
-                    <input type="number" name="currage" id="currage" placeholder="1" />
+                    <input type="number" name="currage" id="currage-input" placeholder="1" />
                 </div>
                 <div class="input-currgender">
                     <label>Gender</label>
                     <div class="form-row">
-                        <label><input type="radio" name="currgender" id="currgender" value="M"/> M</label>
-                        <label><input type="radio" name="currgender" id="currgender" value="F"/> F</label>
+                        <label><input type="radio" name="currgender" id="" value="M"/> M</label>
+                        <label><input type="radio" name="currgender" id="" value="F"/> F</label>
                     </div>
                 </div>
             </div>
@@ -50,11 +50,11 @@ document.addEventListener("DOMContentLoaded", () => {
             <div class="stacking">
                 <div class="input-vetname">
                     <label for="vetname">Your Veterinarian</label>
-                    <input type="text" name="vetname" id="vetname" placeholder="Dr. Santos" />
+                    <input type="text" name="vetname" id="vetname-input" placeholder="Dr. Santos" />
                 </div>
                 <div class="input-vetnum">
                     <label for="vetnum">Contact Number</label>
-                    <input type="text" name="vetnum" id="vetnum" placeholder="1" />
+                    <input type="text" name="vetnum" id="vetnum-input" placeholder="1" />
                 </div>
             </div>
         `;
