@@ -1,52 +1,46 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const cors = require('cors');
-const dotenv = require('dotenv');
-const db = require('./config/db'); // MySQL DB connection
-const userRoutes = require('./routes/userRoutes');
-const path = require('path'); // Import the 'path' module
-
-dotenv.config();
+const path = require('path');
+const supabase = require('./supabaseClient');
+const userController = require('../controllers/userController');
 
 const app = express();
+const PORT = process.env.PORT || 3000;
 
-// Middleware
+// Middlewares
 app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, '../public')));
+app.use('/assets', express.static(path.join(__dirname, '..', 'assets')));
 
-// Serve static files from the 'public' directory
-app.use(express.static(path.join(__dirname, 'public')));
+//get all pets
+app.get('/api/pets', async (req, res) => {
+  const { data, error } = await supabase
+    .from('pet_details')
+    .select('*');
 
-// Serve index.html for the root URL
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  if (error) {
+    console.error('Supabase error:', error.message);
+    return res.status(500).json({ error: 'Failed to fetch pets' });
+  }
+
+  res.json(data);
 });
 
-// Routes
-app.use('/api/users', userRoutes);
+//stattic files
+app.use(express.static('public'));
 
-// You can still have other API routes like this:
-app.get('/api', (req, res) => {
-    res.send('API is running...');
-});
+// login and register route
+app.post('/api/login', userController.login);
+app.post('/api/register', userController.register);
 
-// Connect to DB and start server
-const PORT = process.env.PORT || 3306;
+//debug
+console.log('Register route loaded:', typeof userController.register);
 
-// Get a connection from the pool to test the database connection
-db.getConnection((err, connection) => {
-    if (err) {
-        console.error('❌ Failed to connect to MySQL:', err);
-        process.exit(1); // Exit if DB connection fails
-    }
-
-    console.log('✅ Connected to MySQL database');
-    // IMPORTANT: Release the connection immediately after the test is complete
-    connection.release(); // This connection is just for the startup check, release it.
-
-    // Now, start the Express server ONLY AFTER the database connection test is successful
-    app.listen(PORT, () => {
-        console.log(`🚀 Server running on http://localhost:${PORT}`);
-        console.log(`Frontend served from http://localhost:${PORT}/`); // Access your frontend here
-    });
+// Start server
+app.listen(PORT, () => {
+  console.log(`Server running at http://localhost:${PORT}`);
+  console.log(`POST /api/login`);
+  console.log(`GET  /api/pets`);
 });
