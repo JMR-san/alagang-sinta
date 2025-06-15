@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
-const supabase = require('./controllers/supabaseClient');
+const supabase = require('./supabaseClient');
 const userController = require('./controllers/userController');
 
 const app = express();

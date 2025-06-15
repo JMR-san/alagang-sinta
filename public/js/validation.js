@@ -26,7 +26,7 @@ e.preventDefault();
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({ username, password })
+    body: JSON.stringify({username, password})
   })
 .then((res) => {
   // Instead of res.json(), get text to see raw response
