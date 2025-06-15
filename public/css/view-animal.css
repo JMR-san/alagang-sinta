@@ -40,9 +40,10 @@
 }
 
 .pet-card {
-    border: 1px solid #ccc;
+    border: 1px solid #628a66;
     padding: 10px;
     text-align: center;
+    border-radius: 10px;
 }
 
 .pet-card .image {
@@ -57,4 +58,11 @@
     height: 100%;
     object-fit: cover;
     object-position: center;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.image img:hover {
+  transform: scale(1.03);
+  transition: transform 0.3s ease-in-out;
 }

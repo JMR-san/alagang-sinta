@@ -1,0 +1,323 @@
+:root {
+    --header-color: #646C5B;
+    --footer-color: #646C5B;
+    --main-color: #4D5E3A;
+    --background-color: #f2efdf;
+}
+
+.content-container {
+    background-color: var(--background-color);
+    padding: 2vh 2vw;
+}
+
+#form-container {
+    margin: 1%;
+    background-color: #4d5e3a6e;
+    height: auto;
+    /* width: 90%; */
+    padding: 1vh 2vw;
+}
+
+.form-logo, .form-name {
+    width: 10%;
+    height: auto;
+    margin: 0px auto; /* center logo */
+}
+
+.form-name {
+    width: fit-content;  
+}
+
+.applicant-information h4 {
+    padding-bottom: 20px;
+}
+input {
+    background-color: var(--background-color);
+    padding: 10px;
+}
+
+.stacking {
+    /* gap: 10%; */
+    /* padding: 20px; */
+    display: flex;
+    justify-content: space-between;
+    flex-grow: 2;
+}
+
+.stacking label {
+    padding: 10px 0px;
+}
+
+.input-password {
+    display: flex;
+    flex-direction: column;
+    width: 42.5%;
+}
+.input-fname {
+    display: flex;
+    flex-direction: column;
+    width: 55%;
+}
+.input-age {
+    display: flex;
+    flex-direction: column;
+    width: 15%;
+}
+.input-nationality {
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+}
+.input-address{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.input-telphone {
+    display: flex;
+    flex-direction: column;
+    width: 47.5%;
+}
+.input-mobilenum {
+    display: flex;
+    flex-direction: column;
+    width: 47.5%;
+}
+.input-emailadd {
+    display: flex;
+    flex-direction: column;
+    width: 55%;
+}
+.input-occupation {
+    display: flex;
+    flex-direction: column;
+    width: 47.5%;
+}
+
+.align {
+    padding: 2% 0px;
+    display: flex;
+    width: 100%;
+}
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2%;
+  margin-bottom: 15px;
+  flex-grow: 1;
+  /* justify-content:space-between; */
+}
+.stack-residence {
+    width: 65%;
+}
+
+.form-row label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 400;
+}
+
+input[type="radio"] {
+  border: 2px solid var(--main-color);
+  border-radius: 50%;
+}
+
+input:checked[type="radio"] {
+  width: 20px;
+  height: 20px;
+  background-color: #333;
+}
+
+.residence-instruct{
+    width: 30%;
+    justify-content: start;
+}
+
+
+.household-container {
+  width: 100%;
+  margin: auto;
+  /* background-color: #e0e0e0; */
+  background: var(--background-color);
+  opacity: 0.8;
+}
+
+.member-form {
+  background: var(--background-color);
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  align-items: flex-end;
+}
+
+.form-group {
+  flex: 1 1 200px;
+  display: flex;
+  flex-direction: column;
+}
+
+input[type="text"],
+input[type="number"] {
+  padding: 8px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  
+}
+
+.checkbox-group label {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+}
+
+input[type="checkbox"] {
+  margin-right: 5px;
+  border: 2px solid var(--main-color);
+}
+
+input:checked[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  background-color: #333;
+}
+
+.add-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background: var(--main-color);
+  border: 1px solid #aaa;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 1%;
+  color: var(--background-color);
+}
+.delete-button {
+  /* position: absolute; */
+  top: 10px;
+  right: 10px;
+  background: #ff4d4d;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  font-size: 16px;
+  line-height: 25px;
+  text-align: center;
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .member-form {
+    flex-direction: column;
+  }
+}
+
+.reminder-container {
+  width: 100%;
+  font-style: italic;
+}
+
+.border-line {
+  height: 5px;
+  width: 100%;
+  background-color: var(--background-color);
+  margin: 1% 0%;
+}
+.btn-edit, .btn-delete {
+  padding: 10px 20px;
+  font-size: 16px;
+  background: var(--main-color);
+  border: 1px solid #aaa;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 1%;
+  color: var(--background-color);
+ 
+}
+
+.profile-btn-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 3%;
+  margin-bottom: 3%;
+}
+
+.edit-btn-holder,
+.delete-btn-holder {
+  display: inline-block;
+}
+
+
+.input-currspecies {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+}
+.input-currage {
+    display: flex;
+    flex-direction: column;
+    width: 10%;
+}
+
+.input-currgender {
+    display: flex;
+    flex-direction: column;
+    width: 10%;
+    justify-content: space-between;
+}
+
+/* .gender-container {
+    justify-content: space-between;
+} */
+
+.currpet-form, .pastpet-form{
+  background: var(--background-color);
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-vetname {
+    display: flex;
+    flex-direction: column;
+    width: 55%;
+}
+.input-vetnum {
+    display: flex;
+    flex-direction: column;
+    width: 42.5%;
+}
+
+.input-pastspecies {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+}
+.input-pastage {
+    display: flex;
+    flex-direction: column;
+    width: 10%;
+}
+.input-paststatus {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    justify-content: space-between;
+}
