@@ -8,7 +8,7 @@ const mysql = require('mysql2/promise'); // MySQL client for Node.js with Promis
 const bodyParser = require('body-parser'); // Middleware to parse incoming request bodies
 const cors = require('cors'); // Middleware to enable Cross-Origin Resource Sharing (CORS)
 const path = require('path'); // Node.js path module for working with file paths
-const userController = require('../controllers/userController'); // Import the userController
+const userController = require('./controllers/userController');
 
 // 2. Initialize Express application
 const app = express();
@@ -65,7 +65,7 @@ async function executeQuery(sql, params = []) {
 }
 
 // API Route for User Login
-app.post('/api/login', userController.login);
+app.post('/api/login', userController);
 
 // --- API Route for CREATE (POST /api/applications) ---
 // Handles new application submissions
