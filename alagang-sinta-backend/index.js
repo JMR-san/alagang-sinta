@@ -1,17 +1,25 @@
-const express = require('express')
-    app = express()
+const express = require('express');
+const cors = require('cors');
+const bodyParser = require('body-parser');
+const supabase = require('./supabaseClient');
 
-    const db = require('./db')
-    userRoutes = require('../controllers/userController')
+const app = express();
+app.use(cors());
+app.use(bodyParser.json());
 
-    app.use('/api/users', userRoutes)
+// Sample route to fetch pets
+app.get('/pets', async(req,res) => {
+    const{data, error} = await supabase
+    .from('pet_details')
+    .select('*');
 
+    if(error){
+        return res.status(500).json({error: error.message});
+    }
 
-db.query("SELECT 1")
-.then( () => {
-    console.log('debugger.connection succeeded.')
-    app.listen(5500,
-        () => console.log('server start at 5500'))
-    })
-.catch(err=>console.log('db connection failed. \n' + err))
+    res.json(data);
+})
 
+app.listen(3000,() => {
+    console.log('Server running on http://localhost:3000');
+});
