@@ -1,0 +1,142 @@
+:root {
+    --header-color: #646C5B;
+    --footer-color: #646C5B;
+    --main-color: #4D5E3A;
+    --background-color: #f2efdf;
+}
+
+#pet-details-container {
+    background-color: var(--background-color);
+    flex-direction: row;
+    display: flex;
+    flex-grow: 1;
+    flex-wrap: wrap;
+    padding: 40px 25px;
+}
+
+#pet-image-container {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  aspect-ratio: 4 / 3;
+  /* margin: 0 auto 20px auto; */
+  border-radius: 16px;
+  /* overflow: hidden; */
+}
+
+.pet-image-holder {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.pet-image-holder.active {
+  opacity: 1;
+}
+
+#pet-thumbnails {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.thumbnail {
+  width: 120px;
+  height: 80px;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border 0.3s;
+}
+
+.thumbnail.active {
+  border: 2px solid #ffa500;
+}
+
+.thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* 
+#pet-image-container {
+    flex-direction: column;
+    width: 50%;
+} */
+
+.pet-image-holder {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  border-radius: 7.5%;
+}
+
+.pet-image-holder.active {
+  opacity: 1;
+  border-radius: 7.5%;
+}
+
+#pet-image-default{
+    width: 100%;
+    height: auto;
+    
+}
+/* .pet-image-holder {
+    width: 150px;
+    height: 100px;
+    margin: 10px;
+    border-radius: 10px;
+    object-fit: cover;
+} */
+.images-container {
+    width: 40%;
+}
+#pet-name-holder {
+    width: 60%;
+    height: auto;
+    padding-left: 50px;
+}
+
+#adopt-btn {
+    width: 100%;
+    height: auto;
+    padding-left: 70%;
+}
+
+#btn-animal-adopt {
+    background-color: var(--main-color);
+    color: var(--background-color);
+    height: 4vw;
+    width: 10vw;
+}
+
+#pet-desc-container {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    /* box-shadow: 2px 0px 2px 0px black; */
+
+}
+
+#pet-desc h3 {
+        text-align: start;
+}
+
+.border-line {
+    width: 100%;
+    height: 5px;
+    background-color: grey;
+    margin: 2.5% 0%;
+    /* opacity: 0.8; */
+}

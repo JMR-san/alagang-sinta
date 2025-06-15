@@ -1,0 +1,60 @@
+:root {
+    --header-color: #646C5B;
+    --footer-color: #646C5B;
+    --main-color: #4D5E3A;
+    --background-color: #f2efdf;
+}
+
+.animal-container {
+    width: 75%;
+    height: fit-content;
+    padding-bottom: 7vh;
+    margin-left: 12.5%;
+    background-color: var(--background-color);
+
+}
+
+.animal-filter {
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+    height: 8vh;
+}
+
+.animal-filter button {
+    width: 10vw;
+    margin: 10px 10px 10px 0;
+    background-color: var(--main-color);
+    color: var(--background-color);
+}
+
+.animal-filter button .active{
+    opacity: 0.5;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.pet-card {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+.pet-card .image {
+    width: 100%;
+    height: 100px;
+    background-color: #ddd;
+    margin-bottom: 10px;
+}
+
+.image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
