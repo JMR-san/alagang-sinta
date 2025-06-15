@@ -1,4 +1,4 @@
-const supabase = require('../alagang-sinta-backend/supabaseClient');
+const supabase = require('./supabaseClient');
 const { generateCustomId } = require('../utils/idGenerator');
 
 //login function

@@ -2,8 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
-const supabase = require('./supabaseClient');
-const userController = require('../controllers/userController');
+const supabase = require('./controllers/supabaseClient');
+const userController = require('./controllers/userController');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
