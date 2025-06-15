@@ -2,31 +2,29 @@ const supabase = require('../supabaseClient');
 const { generateCustomId } = require('../utils/idGenerator');
 
 //login function
+// In controllers/userController.js
 exports.login = async (req, res) => {
-  const {username, password} = req.body;
+  const { email, password } = req.body;
 
-  if (!username || !password) {
-    return res.status(400).json({ message: 'Username and password required.' });
-  }
-
-  const {data, error} = await supabase
+  const { data, error } = await supabase
     .from('applicant_information')
     .select('*')
-    .eq('applicant_username', username)
-    .single();
+    .eq('applicant_email', email)
+    .eq('applicant_password', password)
+    .single(); // Only works if email+password combo is truly unique
 
-  if (error) {
-    console.error('Login error:', error.message);
-    return res.status(500).json({ message: 'Login failed.' });
+  if (error || !data) {
+    return res.status(401).json({ message: 'Invalid credentials' });
   }
 
-  if (!data || data.applicant_password !== password) {
-    return res.status(401).json({ message: 'Invalid username or password.' });
-  }
-
-  const { applicant_password, ...safeUser } = data;
-  res.status(200).json({ message: 'Login successful!', user: safeUser });
+  // Return the applicant ID and name/email
+  res.json({
+    applicant_id: data.applicant_id,
+    applicant_email: data.applicant_email,
+    applicant_name: data.applicant_name
+  });
 };
+
 
 
 //regis function

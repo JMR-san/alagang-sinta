@@ -13,9 +13,10 @@ async function generateCustomId(tableName, columnName, prefix) {
     throw new Error('Unable to generate ID');
   }
 
-  const lastId = data[0]?.[columnName] || `${prefix}00000`;
+  const lastId = data[0]?.[columnName] || `${prefix}-00000`;
   const numeric = parseInt(lastId.split('-')[1], 10);
-  const nextId = `${prefix}${String(numeric + 1).padStart(5, '0')}`;
+  const nextId = `${prefix}-${String(numeric + 1).padStart(5, '0')}`;
+
   return nextId;
 }
 

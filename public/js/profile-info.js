@@ -39,22 +39,22 @@ function createEditableRow(containerId, item, type, fields, applicantId) {
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
-  const applicantEmail = localStorage.getItem('applicant_email');
-  if (!applicantEmail) return;
+const applicantId = localStorage.getItem('applicant_id');
+if (!applicantId) return;
 
 const { data: profile, error: profileError } = await supabase
-    .from('applicant_information')
-    .select('*')
-    .eq('applicant_email', applicantEmail)
-    .single();
+  .from('applicant_information')
+  .select('*')
+  .eq('applicant_id', applicantId)
+  .single();
+
+
 
   if (profileError || !profile) {
   console.error('Failed to fetch applicant profile:', profileError);
   alert('Could not load your profile. Please check if your email is correct.');
   return;
 }
-
-  const applicantId = profile.applicant_id;
 
   document.getElementById('emailadd').placeholder = profile.applicant_email || '';
   document.getElementById('password').placeholder = '********';
