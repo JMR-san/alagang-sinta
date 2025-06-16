@@ -46,6 +46,19 @@ function generateNextId(lastId, prefix, digits = 4) {
   return nextId;
 }
 
+async function generateCustomId(tableName, columnName, prefix, digits = 4) {
+  console.log('Generating custom ID with params:', { tableName, columnName, prefix, digits }); // Debug log
+  try {
+    const lastId = await fetchLastId(tableName, columnName);
+    const newId = generateNextId(lastId, prefix, digits);
+    console.log('Generated custom ID:', newId);
+    return newId;
+  } catch (error) {
+    console.error('Error generating custom ID:', error);
+    throw error;
+  }
+}
+
 async function generateBatchIds(tableName, columnName, prefix, count, digits = 4) {
   console.log('Starting generateBatchIds with params:', { tableName, columnName, prefix, count, digits }); // Debug log
   
@@ -80,4 +93,4 @@ async function generateBatchIds(tableName, columnName, prefix, count, digits = 4
   }
 }
 
-module.exports = { fetchLastId, generateNextId, generateBatchIds };
+module.exports = { fetchLastId, generateNextId, generateBatchIds, generateCustomId };

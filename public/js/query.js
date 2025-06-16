@@ -10,20 +10,20 @@ document.getElementById("adoption-form").addEventListener("submit", async functi
   }));
 
   const data = {
-    password: document.getElementById("password-input").value,
-    fullname: document.getElementById("fullname-input").value,
-    age: parseInt(document.getElementById("age-input").value),
-    nationality: document.getElementById("nationality-input").value,
-    address: document.getElementById("address-input").value,
-    telphone: document.getElementById("telphone-input").value,
-    mobilenum: document.getElementById("mobilenum-input").value,
-    emailadd: document.getElementById("emailadd-input").value,
-    occupation: document.getElementById("occupation-input").value,
-    residence: document.querySelector('input[name="residence"]:checked')?.value,
-    ownership: document.querySelector('input[name="ownership"]:checked')?.value,
-    allowedpets: document.querySelector('input[name="allowedpets"]:checked')?.value,
-    childbehave: document.querySelector('input[name="childbehave"]:checked')?.value,
-    visit: document.querySelector('input[name="visit"]:checked')?.value,
+    applicant_password: document.getElementById("password-input").value,
+    applicant_name: document.getElementById("fullname-input").value,
+    applicant_age: parseInt(document.getElementById("age-input").value),
+    applicant_nationality: document.getElementById("nationality-input").value,
+    applicant_address: document.getElementById("address-input").value,
+    applicant_telephone: document.getElementById("telphone-input").value,
+    applicant_mobileno: document.getElementById("mobilenum-input").value,
+    applicant_email: document.getElementById("emailadd-input").value,
+    applicant_occupation: document.getElementById("occupation-input").value,
+    applicant_residence_type: document.querySelector('input[name="residence"]:checked')?.value,
+    applicant_residence_ownership: document.querySelector('input[name="ownership"]:checked')?.value,
+    applicant_pets_allowed: document.querySelector('input[name="allowedpets"]:checked')?.value,
+    applicant_child_behavior: document.querySelector('input[name="childbehave"]:checked')?.value,
+    applicant_permission: document.querySelector('input[name="visit"]:checked')?.value,
     household_members: members
   };
 

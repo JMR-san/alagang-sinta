@@ -393,13 +393,11 @@ document.addEventListener('DOMContentLoaded', async () => {
       for (const wrapper of pastPetWrappers) {
         const id = wrapper.dataset.id;
         const statusInput = wrapper.querySelector('input[name^="paststatus-"]:checked');
-        const rescueInput = wrapper.querySelector('input[name^="pastresc-"]:checked');
 
         const item = {
           past_pet_type: wrapper.querySelector('.past-species')?.value || '',
           past_pet_age: parseOrNull(wrapper.querySelector('.past-age')?.value),
           past_pet_status: statusInput?.value || null,
-          is_rescued: rescueInput?.value || null,
           applicant_id: finalApplicantId
         };
 
@@ -552,11 +550,6 @@ function createPastPetForm(container, item = {}) {
           <label><input type="radio" name="paststatus-${pastPetCount}" value="Rehomed" ${item.past_pet_status === 'Rehomed' ? 'checked' : ''}/> Rehomed</label>
         </div>
       </div>
-    </div>
-    <div class="form-row">
-      <label>Was your past pet rescued?</label>
-      <label><input type="radio" name="pastresc-${pastPetCount}" value="Yes"> Yes</label>
-      <label><input type="radio" name="pastresc-${pastPetCount}" value="No"> No</label>
     </div>
   `;
   container.appendChild(wrapper);
