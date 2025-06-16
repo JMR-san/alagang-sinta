@@ -28,8 +28,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 <div class="input-paststatus">
                     <label>Status</label>
                     <div class="form-row">
-                        <label><input type="radio" name="paststatus" id="" value="Deceased"/> Deceased</label>
-                        <label><input type="radio" name="paststatus" id="" value="Rehomed"/> Rehomed</label>
+                        <label><input type="radio" id="paststatus-deceased" name="paststatus" id="" value="Deceased"/> Deceased</label>
+                        <label><input type="radio" id="paststatus-rehomed" name="paststatus" id="" value="Rehomed"/> Rehomed</label>
                     </div>
                 </div>
             </div>

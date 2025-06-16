@@ -50,29 +50,32 @@ form.addEventListener('submit', async (e) => {
     return;
   }
 
-  // Query your custom users table
   const { data, error } = await supabase
-    .from('applicant_information') // or your actual table name
+    .from('applicant_information')
     .select('*')
     .eq('applicant_email', email)
     .single();
 
-  if (error) {
+  if (error || !data) {
     error_message.innerText = "User not found.";
     console.error("Supabase Fetch Error:", error);
     return;
   }
 
-  // Compare passwords (use hashing in production!)
   if (data.applicant_password !== password) {
     error_message.innerText = "Incorrect password.";
     return;
   }
 
-  // Login success - redirect
+  // ✅ Store applicant_id and email for later profile use
+  localStorage.setItem('applicant_id', data.applicant_id);
+  localStorage.setItem('applicant_email', data.applicant_email);
+
+  // ✅ Now redirect
   console.log("Login success:", data);
   window.location.href = "/pages/homepage.html";
 });
+
 
 function getLoginFormErrors(email, password){
   let errors = []

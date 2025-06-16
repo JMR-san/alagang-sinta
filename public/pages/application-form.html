@@ -31,14 +31,10 @@
                             Remember that this is a lifetime commitment.<br><br>
                         </p>
                         <!-- Message display area -->
-                        <form action="/submit-form" method="POST" class="form-information">
+                        <form  method="POST" class="form-information" id="adoption-form">
                             <div id="applicant" class="applicant-information">
                                 <h4><u><strong>APPLICANT INFORMATION</strong></u></h4>
                                 <div class="stacking">
-                                    <div class="input-username">
-                                        <label for="username">Username</label>
-                                        <input type="text" name="username" id="username-input" placeholder="Enter a Username" required/>
-                                    </div>
                                     <div class="input-password">
                                         <label for="password">Password</label>
                                         <input type="text" name="password" id="password-input" placeholder="Enter a Password" required />
@@ -70,7 +66,7 @@
                                         <input type="text" name="telphone" id="telphone-input" placeholder="123 123456" required />
                                     </div>
                                     <div class="input-mobilenum">
-                                        <label for="mobilenum">Address</label>
+                                        <label for="mobilenum">Mobile number</label>
                                         <input type="text" name="mobilenum" id="mobilenum-input" placeholder="09123456789" required />
                                     </div>
                                 </div>
@@ -103,18 +99,18 @@
                                 </div>
                                 <div class="form-row">
                                     <label>If not a homeowner, do you have permission to keep pets?</label>
-                                    <label><input type="radio" name="allowedpets" value="Yes"> Yes</label>
-                                    <label><input type="radio" name="allowedpets" value="No"> No</label>
+                                    <label><input type="radio" id="allowedpets-yes" name="allowedpets" value="TRUE"> Yes</label>
+                                    <label><input type="radio" id="allowedpets-no" name="allowedpets" value="FALSE"> No</label>
                                 </div>
                                 <div class="form-row">
                                     <label>If you have children, have they been taught how to behave with animals?</label>
-                                    <label><input type="radio" name="childbehave" value="Yes"> Yes</label>
-                                    <label><input type="radio" name="childbehave" value="No"> No</label>
+                                    <label><input type="radio" id="childbehave-yes" name="childbehave" value="TRUE"> Yes</label>
+                                    <label><input type="radio" id="childbehave-no" name="childbehave" value="FALSE"> No</label>
                                 </div>
                                 <div class="form-row">
                                     <label>Do we have permission to visit your home?</label>
-                                    <label><input type="radio" name="visit" value="Yes"> Yes</label>
-                                    <label><input type="radio" name="visit" value="No"> No</label>
+                                    <label><input type="radio" id="visit-yes" name="visit" value="TRUE"> Yes</label>
+                                    <label><input type="radio" id="visit-no" name="visit" value="FALSE"> No</label>
                                 </div>
                             </div>
                             <div class="border-line"></div>
@@ -135,15 +131,16 @@
                             <div class="current-pets-container">
                                 <div class="form-row">
                                     <label>Do you currently have any pets?</label>
-                                    <label><input id="" type="radio" name="hascurrpets" value="yes"> Yes</label>
-                                    <label><input id="" type="radio" name="hascurrpets" value="No"> No</label>
+                                    <label><input id="hascurrpets-yes" type="radio" name="hascurrpets" value="yes"> Yes</label>
+                                    <label><input id="hascurrpets-no" type="radio" name="hascurrpets" value="No"> No</label>
                                 </div>
                                 <div id="currpets-container">
                                     <div class="reminder-container">
                                         <p>If yes, please give us the following details:</p>
                                     </div>
+                                    <button id="add-currpet" class="add-button">+ Add another pet</button>
                                 </div>
-                                <button id="add-currpet" class="add-button">+ Add another pet</button>
+                                
                             </div>
                             <div></div>
                             <h5><u><strong>Past Pets</strong></u></h5>
@@ -152,8 +149,8 @@
                                 <p><i>List pets owned in the past 10 years, other than those listed above.</p>
                                 <div class="form-row">
                                     <label>Have you had any past pets?</label>
-                                    <label><input id="" type="radio" name="haspastpets" value="yes"> Yes</label>
-                                    <label><input id="" type="radio" name="haspastpets" value="No"> No</label>
+                                    <label><input id="haspastpets-yes" type="radio" name="haspastpets" value="yes"> Yes</label>
+                                    <label><input id="haspastpets-no" type="radio" name="haspastpets" value="No"> No</label>
                                 </div>
                                 <div id="pastpets-container">
                                     <div class="reminder-container">
@@ -163,7 +160,7 @@
                                 <button id="add-pastpet" class="add-button">+ Add another pet</button>
                             </div>
                             <div class="sign-up-btn-holder">
-                                <button class="btn-sign-up">Sign Up</button>
+                                <button class="btn-sign-up" type="submit">Sign Up</button>
                                 <p>Already have an Account? <a href="/index.html">Click Here</a></p>
                             </div>
                         </form>
@@ -171,11 +168,11 @@
                 </div>
             </main>
         </div>
-<script src="/js/add-member.js"></script>
-<script src="/js/add-curr-pets.js"></script>
-<script src="/js/add-pastpets.js"></script>
-<script src="/js/submit-form.js"></script>
-<script src="/js/validation.js"></script>
-<script src="/js/query.js"></script>
+<script src="../js/add-member.js"></script>
+<script src="../js/add-curr-pets.js"></script>
+<script src="../js/add-pastpets.js"></script>
+<!-- <script src="/pages/alagang-sinta-backend/controllers/submitFormController.js"></script> -->
+<!-- <script src="/js/validation.js"></script> -->
+<script src="../js/query.js"></script>
 </body>
 </html>

@@ -2,10 +2,12 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
+
 const supabase = require('./supabaseClient');
 const userController = require('./controllers/userController');
+const submitFormController = require('./controllers/submitFormController');
 
-const app = express();
+const app = express(); // ✅ Declare app first!
 const PORT = process.env.PORT || 3000;
 
 // Middlewares
@@ -13,8 +15,10 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../public')));
 app.use('/assets', express.static(path.join(__dirname, '..', 'assets')));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-//get all pets
+// Get all pets from Supabase
 app.get('/api/pets', async (req, res) => {
   const { data, error } = await supabase
     .from('pet_details')
@@ -28,14 +32,12 @@ app.get('/api/pets', async (req, res) => {
   res.json(data);
 });
 
-//stattic files
-app.use(express.static('public'));
-
-// login and register route
+// Login and register routes
 app.post('/api/login', userController.login);
 app.post('/api/register', userController.register);
+app.post('/submit', submitFormController.submitForm);
 
-//debug
+// Debug
 console.log('Register route loaded:', typeof userController.register);
 
 // Start server
