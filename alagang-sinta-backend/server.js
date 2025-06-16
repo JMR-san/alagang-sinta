@@ -6,6 +6,7 @@ const path = require('path');
 const supabase = require('./supabaseClient');
 const userController = require('./controllers/userController');
 const submitFormController = require('./controllers/submitFormController');
+const { generateBatchIds } = require('./utils/idGenerator');
 
 const app = express(); // ✅ Declare app first!
 const PORT = process.env.PORT || 3000;
@@ -17,6 +18,33 @@ app.use(express.static(path.join(__dirname, '../public')));
 app.use('/assets', express.static(path.join(__dirname, '..', 'assets')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Generate IDs endpoint
+app.post('/api/generate-ids', async (req, res) => {
+  try {
+    console.log('Received request body:', req.body); // Debug log
+    const { tableName, columnName, prefix, count, digits = 4 } = req.body;
+    
+    if (!tableName || !columnName || !prefix || !count) {
+      return res.status(400).json({ 
+        error: 'Missing required parameters',
+        received: { tableName, columnName, prefix, count }
+      });
+    }
+
+    console.log('Generating IDs with params:', { tableName, columnName, prefix, count, digits }); // Debug log
+    const ids = await generateBatchIds(tableName, columnName, prefix, count, digits);
+    console.log('Generated IDs:', ids); // Debug log
+    
+    res.json({ ids });
+  } catch (error) {
+    console.error('Error generating IDs:', error);
+    res.status(500).json({ 
+      error: error.message,
+      stack: error.stack // Include stack trace for debugging
+    });
+  }
+});
 
 // Get all pets from Supabase
 app.get('/api/pets', async (req, res) => {
@@ -45,4 +73,5 @@ app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
   console.log(`POST /api/login`);
   console.log(`GET  /api/pets`);
+  console.log(`POST /api/generate-ids`);
 });

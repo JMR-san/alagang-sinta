@@ -6,9 +6,35 @@ const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 let hasUnsavedChanges = false;
+async function getBatchIds(tableName, columnName, prefix, count, digits = 4) {
+  try {
+    const response = await fetch('/api/generate-ids', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        tableName,
+        columnName,
+        prefix,
+        count,
+        digits
+      })
+    });
 
+    if (!response.ok) {
+      throw new Error(`Failed to generate IDs: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    return data.ids;
+  } catch (error) {
+    console.error('Error generating IDs:', error);
+    throw error;
+  }
+}
 function parseOrNull(value) {
-  const num = parseInt(value);
+  const num = parseInt(value, 10);
   return isNaN(num) ? null : num;
 }
 
@@ -43,11 +69,14 @@ function createEditableRow(containerId, item, type, fields, applicantId) {
   div.dataset.id = recordId;
   div.dataset.idColumn = idColumn;
 
-  fields.forEach(field => {
-    const input = document.createElement('input');
-    input.value = item[field] || '';
-    input.dataset.field = field;
-    input.className = `${type}-input`;
+  fields.forEach((field) => {
+  const input = document.createElement('input'); // <-- declare input here
+  input.value = item[field] || '';
+  input.defaultValue = input.value; // <-- this was causing the error
+  input.dataset.field = field;
+  input.className = `${type}-input`;
+  input.addEventListener('input', () => { hasUnsavedChanges = true; });
+  div.appendChild(input);
 
     input.addEventListener('input', () => {
       hasUnsavedChanges = true;
@@ -162,88 +191,232 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.querySelector('.save-btn-holder').classList.toggle('hidden', !isEditing);
   });
 
-  document.getElementById('save-btn').addEventListener('click', async (e) => {
-    e.preventDefault();
-    hasUnsavedChanges = false;
+   document.getElementById('save-btn').addEventListener("click", async () => {
+    const nameInput = document.getElementById('name');
+    const addressInput = document.getElementById('address');
+    const emailInput = document.getElementById('email');
+    const applicantIdInput = document.getElementById('applicantId');
+    const passwordInput = document.getElementById('password');
+    const ageInput = document.getElementById('age');
+    const nationalityInput = document.getElementById('nationality');
+    const telephoneInput = document.getElementById('telphone');
+    const mobileInput = document.getElementById('mobilenum');
+    const occupationInput = document.getElementById('occupation');
+    const residenceTypeInput = document.querySelector('input[name="residence"]:checked');
+    const ownershipTypeInput = document.querySelector('input[name="ownership"]:checked');
+    const petsAllowedInput = document.querySelector('input[name="allowedpets"]:checked');
+    const childBehaviorInput = document.querySelector('input[name="childbehave"]:checked');
+    const permissionInput = document.querySelector('input[name="visit"]:checked');
 
-    const updates = {
-      applicant_id: applicantId,
-      applicant_email: document.getElementById('emailadd').value || profile.applicant_email,
-      applicant_name: document.getElementById('fullname').value || profile.applicant_name,
-      applicant_age: (() => {
-        const ageInput = document.getElementById('age').value;
-        return ageInput !== '' ? parseInt(ageInput) : profile.applicant_age;
-      })(),
-      applicant_nationality: document.getElementById('nationality').value || profile.applicant_nationality,
-      applicant_address: document.getElementById('address').value || profile.applicant_address,
-      applicant_telephone: document.getElementById('telphone').value || profile.applicant_telephone,
-      applicant_mobileno: document.getElementById('mobilenum').value || profile.applicant_mobileno,
-      applicant_occupation: document.getElementById('occupation').value || profile.applicant_occupation,
-      applicant_residence_type: document.querySelector('input[name="residence"]:checked')?.value || profile.applicant_residence_type,
-      applicant_residence_ownership: document.querySelector('input[name="ownership"]:checked')?.value || profile.applicant_residence_ownership,
-      applicant_pets_allowed: document.querySelector('input[name="allowedpets"]:checked')?.value || profile.applicant_pets_allowed,
-      applicant_child_behavior: document.querySelector('input[name="childbehave"]:checked')?.value || profile.applicant_child_behavior,
-      applicant_permission: document.querySelector('input[name="visit"]:checked')?.value || profile.applicant_permission,
-    };
+    let finalApplicantId = applicantIdInput ? applicantIdInput.value : '';
 
-    const cleanedUpdates = cleanUpdates(updates);
+    try {
+      // If we don't have an ID, try to get it from localStorage
+      if (!finalApplicantId) {
+        finalApplicantId = localStorage.getItem('applicant_id');
+      }
 
-    const { data, error: updateError } = await supabase
-      .from('applicant_information')
-      .update(cleanedUpdates)
-      .eq('applicant_id', applicantId)
-      .select();
+      // If we still don't have an ID, this is a new record
+      if (!finalApplicantId) {
+        // For new records, require email and password
+        if (!emailInput?.value) {
+          throw new Error('Email is required for new records');
+        }
+        if (!passwordInput?.value) {
+          throw new Error('Password is required for new records');
+        }
 
-    if (updateError) {
-      console.error('❌ Error updating applicant_information:', updateError.message);
-      alert('Failed to save profile. Check the console for details.');
-      return;
-    }
+        const applicantData = {
+          applicant_name: nameInput?.value || '',
+          applicant_address: addressInput?.value || '',
+          applicant_email: emailInput.value,
+          applicant_password: passwordInput.value,
+          applicant_age: ageInput?.value ? parseInt(ageInput.value) || null : null,
+          applicant_nationality: nationalityInput?.value || '',
+          applicant_telephone: telephoneInput?.value || '',
+          applicant_mobileno: mobileInput?.value || '',
+          applicant_occupation: occupationInput?.value || '',
+          applicant_residence_type: residenceTypeInput?.value || '',
+          applicant_residence_ownership: ownershipTypeInput?.value || '',
+          applicant_pets_allowed: petsAllowedInput?.value || '',
+          applicant_child_behavior: childBehaviorInput?.value || '',
+          applicant_permission: permissionInput?.value || ''
+        };
 
-    const containerMap = {
-      household_member: 'members-container',
-      current_pets: 'currpets-container',
-      past_pets: 'pastpets-container'
-    };
+        // Generate a new applicant_id with the correct prefix
+        const ids = await getBatchIds('applicant_information', 'applicant_id', 'AS', 1);
+        if (!ids || ids.length === 0) {
+          throw new Error('Failed to generate applicant_id');
+        }
+        finalApplicantId = ids[0];
+        
+        // Add the generated ID to the data
+        applicantData.applicant_id = finalApplicantId;
+        
+        const { data, error } = await supabase.from('applicant_information').insert(applicantData).select();
+        if (error) throw error;
+        if (data && data[0]) {
+          if (applicantIdInput) applicantIdInput.value = finalApplicantId;
+          localStorage.setItem('applicant_id', finalApplicantId);
+        }
+      } else {
+        // For updates, only include fields that have values
+        const updateData = {};
+        if (nameInput?.value) updateData.applicant_name = nameInput.value;
+        if (addressInput?.value) updateData.applicant_address = addressInput.value;
+        if (emailInput?.value) updateData.applicant_email = emailInput.value;
+        if (passwordInput?.value) updateData.applicant_password = passwordInput.value;
+        if (ageInput?.value) updateData.applicant_age = parseInt(ageInput.value) || null;
+        if (nationalityInput?.value) updateData.applicant_nationality = nationalityInput.value;
+        if (telephoneInput?.value) updateData.applicant_telephone = telephoneInput.value;
+        if (mobileInput?.value) updateData.applicant_mobileno = mobileInput.value;
+        if (occupationInput?.value) updateData.applicant_occupation = occupationInput.value;
+        if (residenceTypeInput?.value) updateData.applicant_residence_type = residenceTypeInput.value;
+        if (ownershipTypeInput?.value) updateData.applicant_residence_ownership = ownershipTypeInput.value;
+        if (petsAllowedInput?.value) updateData.applicant_pets_allowed = petsAllowedInput.value;
+        if (childBehaviorInput?.value) updateData.applicant_child_behavior = childBehaviorInput.value;
+        if (permissionInput?.value) updateData.applicant_permission = permissionInput.value;
 
-    for (const [type, fields] of [
-      ['household_member', ['house_member_name', 'house_member_relationship', 'house_member_age']],
-      ['current_pets', ['curr_pet_type', 'curr_pet_age', 'curr_pet_sex']],
-      ['past_pets', ['past_pet_type', 'past_pet_age', 'past_pet_status']]
-    ]) {
-      const containerId = containerMap[type];
-      const rows = document.querySelectorAll(`#${containerId} .item-row`);
-
-      for (const row of rows) {
-        const id = row.dataset.id;
-        const item = {};
-        row.querySelectorAll('input').forEach(input => {
-          item[input.dataset.field] = input.value;
-        });
-        item.applicant_id = applicantId;
-
-        if (id && id !== 'null' && id !== 'undefined') {
-          const { error: updateSubError } = await supabase.from(type).update(item).eq(row.dataset.idColumn, id);
-          if (updateSubError) {
-            console.error(`Error updating ${type}:`, updateSubError);
-          }
-        } else {
-          const { error: insertError } = await supabase.from(type).insert(item);
-          if (insertError) {
-            console.error(`Error inserting into ${type}:`, insertError);
-          }
+        // Only update if we have changes
+        if (Object.keys(updateData).length > 0) {
+          const { error } = await supabase.from('applicant_information').update(updateData).eq('applicant_id', finalApplicantId);
+          if (error) throw error;
         }
       }
+
+      if (!finalApplicantId) {
+        throw new Error('Failed to get valid applicant_id');
+      }
+
+      // Handle household members
+      const householdWrappers = document.querySelectorAll('.household-member');
+      for (const wrapper of householdWrappers) {
+        const id = wrapper.dataset.id;
+        const item = {
+          house_member_name: wrapper.querySelector('.member-name')?.value || null,
+          house_member_relationship: wrapper.querySelector('.member-relationship')?.value || null,
+          house_member_age: parseOrNull(wrapper.querySelector('.member-age')?.value),
+          house_member_allergy: wrapper.querySelector('.member-allergies')?.checked || false,
+          house_member_adoption: wrapper.querySelector('.member-supports')?.checked || false,
+          applicant_id: finalApplicantId
+        };
+
+        if (id) {
+          // Update existing household member
+          const { error } = await supabase.from('household_member').update(item).eq('house_member_id', id);
+          if (error) throw error;
+        } else {
+          // Generate new ID for household member
+          const ids = await getBatchIds('household_member', 'house_member_id', 'ASH', 1);
+          if (!ids || ids.length === 0) {
+            throw new Error('Failed to generate household member ID');
+          }
+          item.house_member_id = ids[0];
+          
+          // Insert new household member
+          const { error } = await supabase.from('household_member').insert(item);
+          if (error) throw error;
+        }
+      }
+
+      // Handle current pets
+      const currentPetWrappers = document.querySelectorAll('.current-pets');
+      for (const wrapper of currentPetWrappers) {
+        const id = wrapper.dataset.id;
+        const genderInput = wrapper.querySelector('input[name^="currgender-"]:checked');
+        const rescueInput = wrapper.querySelector('input[name^="currpetresc-"]:checked');
+        const neuteredInput = wrapper.querySelector('input[name^="currpetneu-"]:checked');
+        const breedInput = wrapper.querySelector('input[name^="currpetbred-"]:checked');
+
+        // Handle veterinarian information first
+        const vetName = wrapper.querySelector('.vet-name')?.value || '';
+        const vetContact = wrapper.querySelector('.vet-number')?.value || '';
+        
+        // Generate vet ID and create record even if no info provided
+        const vetIds = await getBatchIds('veterinarian_information', 'vet_id', 'ASV-', 1, 4); // Use ASV- prefix with 4 digits
+        if (!vetIds || vetIds.length === 0) {
+          throw new Error('Failed to generate veterinarian ID');
+        }
+        const vetId = vetIds[0];
+
+        // Always create a veterinarian record with valid data
+        const vetData = {
+          vet_id: vetId,
+          vet_name: vetName.trim() || 'Unknown', // Ensure no whitespace
+          vet_contact_no: vetContact.trim() || 'N/A' // Ensure no whitespace
+        };
+
+        // First try to insert the veterinarian record
+        const { error: vetError } = await supabase.from('veterinarian_information').insert(vetData);
+        if (vetError) {
+          // If insert fails, try to update
+          const { error: updateError } = await supabase.from('veterinarian_information').upsert(vetData);
+          if (updateError) throw updateError;
+        }
+
+        // Then handle current pet information
+        const item = {
+          current_pet_type: wrapper.querySelector('.pet-species')?.value || '',
+          current_pet_age: parseOrNull(wrapper.querySelector('.pet-age')?.value),
+          current_pet_sex: genderInput?.value || null,
+          is_current_pet_rescued: rescueInput?.value || 'No', // Default to 'No' if not specified
+          is_current_pet_neutered: neuteredInput?.value || 'No', // Default to 'No' if not specified
+          is_current_pet_breed: breedInput?.value || 'No', // Default to 'No' if not specified
+          vet_id: vetId, // Link to the veterinarian record we just created
+          applicant_id: finalApplicantId
+        };
+
+        if (id) {
+          const { error } = await supabase.from('current_pets').update(item).eq('current_pet_id', id);
+          if (error) throw error;
+        } else {
+          // Generate current pet ID with the correct format (ASC prefix)
+          const ids = await getBatchIds('current_pets', 'current_pet_id', 'ASC-', 1, 4); // Use ASC- prefix with 4 digits
+          if (!ids || ids.length === 0) {
+            throw new Error('Failed to generate current pet ID');
+          }
+          item.current_pet_id = ids[0];
+          
+          const { error } = await supabase.from('current_pets').insert(item);
+          if (error) throw error;
+        }
+      }
+
+      // Handle past pets
+      const pastPetWrappers = document.querySelectorAll('.past-pets');
+      for (const wrapper of pastPetWrappers) {
+        const id = wrapper.dataset.id;
+        const statusInput = wrapper.querySelector('input[name^="paststatus-"]:checked');
+        const rescueInput = wrapper.querySelector('input[name^="pastresc-"]:checked');
+
+        const item = {
+          past_pet_type: wrapper.querySelector('.past-species')?.value || '',
+          past_pet_age: parseOrNull(wrapper.querySelector('.past-age')?.value),
+          past_pet_status: statusInput?.value || null,
+          is_rescued: rescueInput?.value || null,
+          applicant_id: finalApplicantId
+        };
+
+        if (id) {
+          const { error } = await supabase.from('past_pets').update(item).eq('past_pet_id', id);
+          if (error) throw error;
+        } else {
+          const ids = await getBatchIds('past_pets', 'past_pet_id', 'ASP', 1);
+          if (!ids || ids.length === 0) {
+            throw new Error('Failed to generate past pet ID');
+          }
+          item.past_pet_id = ids[0];
+          
+          const { error } = await supabase.from('past_pets').insert(item);
+          if (error) throw error;
+        }
+      }
+
+      alert("Application saved successfully!");
+    } catch (error) {
+      console.error('Error saving application:', error);
+      alert("Error saving application: " + error.message);
     }
-
-    document.querySelectorAll('input').forEach(input => {
-      input.setAttribute('readonly', true);
-      input.setAttribute('disabled', true);
-    });
-    document.querySelector('.save-btn-holder').classList.add('hidden');
-    isEditing = false;
-
-    alert('Profile saved successfully.');
   });
 });
 
@@ -278,7 +451,9 @@ async function loadEditableTable(containerId, applicantId, table, fields) {
 
 function createHouseholdForm(container, item = {}) {
   const wrapper = document.createElement("div");
-  wrapper.className = "member-form household-member";
+  wrapper.className = "household-member";
+  wrapper.dataset.id = item.house_member_id || '';
+
 
   wrapper.innerHTML = `
     <div class="form-group">
@@ -294,8 +469,8 @@ function createHouseholdForm(container, item = {}) {
       <input type="number" class="member-age" value="${item.house_member_age || ''}" />
     </div>
     <div class="checkbox-group">
-      <label><input type="checkbox" class="member-allergies" ${item.allergies ? 'checked' : ''}/> Has Allergies</label>
-      <label><input type="checkbox" class="member-supports" ${item.supports_adoption ? 'checked' : ''}/> Supports Adoption</label>
+      <label><input type="checkbox" class="member-allergies" ${item.house_member_allergy ? 'checked' : ''}/> Has Allergies</label>
+      <label><input type="checkbox" class="member-supports" ${item.house_member_adoption ? 'checked' : ''}/> Supports Adoption</label>
     </div>
   `;
   container.appendChild(wrapper);
@@ -305,7 +480,8 @@ let currentPetCount = 1;
 
 function createCurrentPetForm(container, item = {}) {
   const wrapper = document.createElement("div");
-  wrapper.className = "current-pet";
+  wrapper.className = "current-pets";
+  wrapper.dataset.id = item.curr_pet_id || '';
 
   wrapper.innerHTML = `
     <div class="stacking">
@@ -327,8 +503,8 @@ function createCurrentPetForm(container, item = {}) {
     </div>
     <div class="form-row">
       <label>Is your current pet rescued?</label>
-      <label><input type="radio" name="currresc-${currentPetCount}" value="Yes"> Yes</label>
-      <label><input type="radio" name="currresc-${currentPetCount}" value="No"> No</label>
+      <label><input type="radio" name="currpetresc-${currentPetCount}" value="Yes"> Yes</label>
+      <label><input type="radio" name="currpetresc-${currentPetCount}" value="No"> No</label>
     </div>
     <div class="stacking">
       <div class="input-vetname">
@@ -345,9 +521,13 @@ function createCurrentPetForm(container, item = {}) {
   currentPetCount++;
 }
 
+let pastPetCount = 0;
+
 function createPastPetForm(container, item = {}) {
+  pastPetCount++;
   const wrapper = document.createElement("div");
-  wrapper.className = "pastpet-form";
+  wrapper.className = "past-pets";
+  wrapper.dataset.id = item.past_pet_id || '';
 
   wrapper.innerHTML = `
     <div class="stacking">
@@ -376,58 +556,7 @@ function createPastPetForm(container, item = {}) {
   container.appendChild(wrapper);
   pastPetCount++;
 }
-
-document.getElementById("save-btn").addEventListener("click", async () => {
-  const applicantId = getApplicantIdFromURL(); // Make sure this function is defined
-
-  const householdData = Array.from(document.querySelectorAll(".household-member")).map(form => ({
-    applicant_id: applicantId,
-    house_member_name: form.querySelector(".member-name")?.value || "",
-    house_member_relationship: form.querySelector(".member-relationship")?.value || "",
-    house_member_age: parseInt(form.querySelector(".member-age")?.value) || null,
-    allergies: form.querySelector(".member-allergies")?.checked || false,
-    supports_adoption: form.querySelector(".member-supports")?.checked || false,
-  }));
-
-  const currentPetsData = Array.from(document.querySelectorAll(".current-pet")).map((form, index) => ({
-    applicant_id: applicantId,
-    curr_pet_type: form.querySelector(".pet-species")?.value || "",
-    curr_pet_age: parseInt(form.querySelector(".pet-age")?.value) || null,
-    curr_pet_sex: form.querySelector(`input[name="currgender-${index + 1}"]:checked`)?.value || null,
-    curr_pet_rescued: form.querySelector(`input[name="currresc-${index + 1}"]:checked`)?.value === "Yes",
-    vet_name: form.querySelector(".vet-name")?.value || "",
-    vet_contact: form.querySelector(".vet-number")?.value || "",
-  }));
-
-  const pastPetsData = Array.from(document.querySelectorAll(".pastpet-form")).map((form, index) => ({
-    applicant_id: applicantId,
-    past_pet_type: form.querySelector(".past-species")?.value || "",
-    past_pet_age: parseInt(form.querySelector(".past-age")?.value) || null,
-    past_pet_status: form.querySelector(`input[name="paststatus-${index + 1}"]:checked`)?.value || "",
-    past_pet_rescued: form.querySelector(`input[name="pastresc-${index + 1}"]:checked`)?.value === "Yes",
-  }));
-
-  // Clear and insert
-  try {
-    await Promise.all([
-      supabase.from("household_member").delete().eq("applicant_id", applicantId),
-      supabase.from("current_pets").delete().eq("applicant_id", applicantId),
-      supabase.from("past_pets").delete().eq("applicant_id", applicantId),
-    ]);
-
-    const { error: houseErr } = await supabase.from("household_member").insert(householdData);
-    const { error: currErr } = await supabase.from("current_pets").insert(currentPetsData);
-    const { error: pastErr } = await supabase.from("past_pets").insert(pastPetsData);
-
-    if (houseErr || currErr || pastErr) {
-      console.error("Save failed:", houseErr || currErr || pastErr);
-      alert("There was an error saving the form. Please try again.");
-    } else {
-      alert("Form saved successfully!");
-    }
-  } catch (err) {
-    console.error("Unexpected save error:", err);
-    alert("Unexpected error. Please check the console.");
-  }
-});
-
+function getApplicantIdFromURL() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get('applicant_id');
+}
