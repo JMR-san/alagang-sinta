@@ -90,7 +90,7 @@
     border-bottom-left-radius: 50%;
     margin-left: 5%;
     margin-right: 5%;
-    background-image: url(/assets/img/dummy-mission.jpeg);
+    background-image: url(/assets/img/mission.jpg);
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -100,7 +100,7 @@
     border-bottom-right-radius: 50%;
     margin-left: 5%;
     margin-right: 5%;
-    background-image: url(/assets/img/dummy-vision.jpg);
+    background-image: url(/assets/img/vision.jpg);
     background-size: cover;
     background-repeat: no-repeat;
 }
