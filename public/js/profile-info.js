@@ -333,11 +333,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         const vetContact = wrapper.querySelector('.vet-number')?.value || '';
         
         // Generate vet ID and create record even if no info provided
-        const vetIds = await getBatchIds('veterinarian_information', 'vet_id', 'ASV-', 1, 4); // Use ASV- prefix with 4 digits
+        const vetIds = await getBatchIds('veterinarian_information', 'vet_id', 'ASV', 1, 4);
         if (!vetIds || vetIds.length === 0) {
           throw new Error('Failed to generate veterinarian ID');
         }
         const vetId = vetIds[0];
+        console.log('Generated vet ID:', vetId, 'Length:', vetId.length);
 
         // Always create a veterinarian record with valid data
         const vetData = {
@@ -345,13 +346,18 @@ document.addEventListener('DOMContentLoaded', async () => {
           vet_name: vetName.trim() || 'Unknown', // Ensure no whitespace
           vet_contact_no: vetContact.trim() || 'N/A' // Ensure no whitespace
         };
+        console.log('Vet data being sent:', vetData);
 
         // First try to insert the veterinarian record
         const { error: vetError } = await supabase.from('veterinarian_information').insert(vetData);
         if (vetError) {
+          console.error('Vet insert error:', vetError);
           // If insert fails, try to update
           const { error: updateError } = await supabase.from('veterinarian_information').upsert(vetData);
-          if (updateError) throw updateError;
+          if (updateError) {
+            console.error('Vet update error:', updateError);
+            throw updateError;
+          }
         }
 
         // Then handle current pet information
@@ -371,7 +377,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           if (error) throw error;
         } else {
           // Generate current pet ID with the correct format (ASC prefix)
-          const ids = await getBatchIds('current_pets', 'current_pet_id', 'ASC-', 1, 4); // Use ASC- prefix with 4 digits
+          const ids = await getBatchIds('current_pets', 'current_pet_id', 'ASC', 1, 4); // Remove hyphen from prefix
           if (!ids || ids.length === 0) {
             throw new Error('Failed to generate current pet ID');
           }

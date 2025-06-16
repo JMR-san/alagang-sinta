@@ -34,7 +34,17 @@ app.post('/api/generate-ids', async (req, res) => {
 
     console.log('Generating IDs with params:', { tableName, columnName, prefix, count, digits }); // Debug log
     const ids = await generateBatchIds(tableName, columnName, prefix, count, digits);
-    console.log('Generated IDs:', ids); // Debug log
+    console.log('Generated IDs:', ids, 'Lengths:', ids.map(id => id.length)); // Debug log
+    
+    // Validate ID format before sending
+    const invalidIds = ids.filter(id => id.length > 9);
+    if (invalidIds.length > 0) {
+      console.error('Invalid ID lengths detected:', invalidIds);
+      return res.status(400).json({
+        error: 'Generated IDs exceed maximum length',
+        invalidIds
+      });
+    }
     
     res.json({ ids });
   } catch (error) {

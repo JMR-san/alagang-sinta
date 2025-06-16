@@ -22,15 +22,18 @@ async function fetchLastId(tableName, columnName) {
 function generateNextId(lastId, prefix, digits = 4) {
   console.log('Generating next ID from:', { lastId, prefix, digits }); // Debug log
   
+  // Ensure prefix doesn't end with a hyphen
+  const cleanPrefix = prefix.endsWith('-') ? prefix.slice(0, -1) : prefix;
+  
   if (!lastId) {
     console.log('No last ID found, generating first ID'); // Debug log
-    const firstId = `${prefix}0001`;
-    console.log('Generated first ID:', firstId);
+    const firstId = `${cleanPrefix}0001`;
+    console.log('Generated first ID:', firstId, 'Length:', firstId.length);
     return firstId;
   }
   
   // Extract numeric part from the last ID (after the prefix)
-  const numeric = parseInt(lastId.substring(prefix.length), 10);
+  const numeric = parseInt(lastId.substring(cleanPrefix.length), 10);
   console.log('Extracted numeric part:', numeric);
   
   if (isNaN(numeric)) {
@@ -38,8 +41,8 @@ function generateNextId(lastId, prefix, digits = 4) {
     throw new Error(`Invalid last ID format: ${lastId}`);
   }
   
-  const nextId = `${prefix}${String(numeric + 1).padStart(digits, '0')}`;
-  console.log('Generated next ID:', nextId); // Debug log
+  const nextId = `${cleanPrefix}${String(numeric + 1).padStart(digits, '0')}`;
+  console.log('Generated next ID:', nextId, 'Length:', nextId.length);
   return nextId;
 }
 
@@ -50,7 +53,10 @@ async function generateBatchIds(tableName, columnName, prefix, count, digits = 4
     const lastId = await fetchLastId(tableName, columnName);
     console.log('Last ID found:', lastId); // Debug log
     
-    let lastNum = lastId ? parseInt(lastId.substring(prefix.length), 10) : 0;
+    // Ensure prefix doesn't end with a hyphen
+    const cleanPrefix = prefix.endsWith('-') ? prefix.slice(0, -1) : prefix;
+    
+    let lastNum = lastId ? parseInt(lastId.substring(cleanPrefix.length), 10) : 0;
     console.log('Parsed last number:', lastNum);
     
     if (isNaN(lastNum)) {
@@ -61,8 +67,8 @@ async function generateBatchIds(tableName, columnName, prefix, count, digits = 4
     const ids = [];
     for (let i = 0; i < count; i++) {
       lastNum++;
-      const newId = `${prefix}${String(lastNum).padStart(digits, '0')}`;
-      console.log('Generated ID in batch:', newId);
+      const newId = `${cleanPrefix}${String(lastNum).padStart(digits, '0')}`;
+      console.log('Generated ID in batch:', newId, 'Length:', newId.length);
       ids.push(newId);
     }
     
